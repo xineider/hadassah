@@ -1,0 +1,47 @@
+<%if(usuario.nivel == 1){ %>
+
+
+<div class="border-radius-5 margin-t-20 border-red margin-b-10 text-center white-text">
+	<div class="container-fluid">
+
+
+		<div class="f25 bold margin-t-10">Negação de Aporte</div>
+		<div class="margin-t-5 margin-b-10">Informar o motivo da Negação do Aporte</div>
+
+		<form method="POST" action="" enctype="multipart/form-data">
+
+			<input type="hidden" name="id" value="<%= data.pedido_aporte_n[0].id %>">
+
+			<div class="row">
+				<div class="form-group col-sm-12">
+					<div class="row">
+						<label class="white-text col-sm-2" for="status">Motivo</label>
+						<div class="col-sm-10">
+							<select name="status" class="form-control">
+								<option>Comprovante Incorreto</option>
+								<option>Aporte Duplicado</option>
+								<option>Valor Informado Incorreto</option>
+								<option>Não Recebimento da Transação</option>
+								<option>Entrar em contato com o Suporte</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<button data-href="/sistema/administracao/pedido-aporte/negar" data-action="<%= data.link_sistema%>/administracao/pedidos-aportes/" class="btn red white-text ajax-submit margin-b-10" data-mensagem-sucesso="Aporte Negado!" data-mensagem-sucesso-color="bg-danger">
+				Negar Aporte<i class="far fa-save-o" aria-hidden="true"></i>
+			</button>
+
+		</form>
+
+	</div>
+
+</div>
+
+<%}else{%>
+<div class="white-text text-center f25">Você não possui permissão para acessar esse conteúdo!</div>
+<%}%>
+

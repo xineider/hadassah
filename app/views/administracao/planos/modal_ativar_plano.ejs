@@ -1,0 +1,26 @@
+
+<b>
+	<p class="center-align white-text">
+		Você tem certeza que deseja ativar '<%= data.plano[0].nome%>'?
+	</p>
+</b>
+
+<div class="row">
+	<div class="col s12 m6">
+		<a style="width: 100%;margin-top: 10px;" class="center-align btn modal_close_button waves-effect btn-flat grey lighten-2">Cancelar</a>
+	</div>
+
+	<div class="col s12 m6">
+
+		<form method="POST" action="" enctype="multipart/form-data">
+
+			<input type="hidden" name="id" value="<%= data.plano[0].id %>">
+			<input type="hidden" name="deletado" value="0">
+
+			<button style="width:100%;margin-top: 10px;" class="center-align modal_close_button waves-effect waves-green btn-flat lighten-2 green white-text ajax-submit-update-mensagem" data-href="/sistema/administracao/plano/desativar" data-action="<%= data.link_sistema%>/administracao/planos/" data-mensagem-sucesso="Plano Ativado com Sucesso!">
+				Ativar
+			</button>  
+
+		</form>
+	</div>
+</div>

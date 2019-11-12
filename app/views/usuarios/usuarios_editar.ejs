@@ -1,0 +1,67 @@
+<div class="card-panel white">
+  <h4>Editar</h4>
+  <form method="POST" action="" enctype="multipart/form-data">
+    <div class="right-align">
+      <a href="/sistema/usuarios/" class="btn-floating btn-large waves-effect waves-light blue darken-2 left ajax-load"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+    <%
+    if (typeof data.usuario != 'undefined' && data.usuario.length > 0) {
+      for (var i2 = data.usuario.length - 1; i2 >= 0; i2--) {
+    %>
+      <button data-href="/sistema/usuarios/atualizar/" data-action="/sistema/usuarios/" class="btn-floating btn-large waves-effect waves-light blue darken-2 ajax-submit">
+        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="row">
+      <input type="hidden" value="<%= data.usuario[i2].id %>" name="id">
+      <div class="input-field col s12 m6">
+        <input required="true" class="validate" type="text" name="login" value="<%= data.usuario[i2].login %>">
+        <label for="nome">Login</label>
+      </div>
+      <div class="input-field col s12 m6">
+        <input required="true" class="validate" type="text" name="nome" value="<%= data.usuario[i2].nome %>">
+        <label for="nome">Nome</label>
+      </div>
+      <div class="input-field col s12 m6">
+        <input required="true" class="validate" type="text" name="email" value="<%= data.usuario[i2].email %>">
+        <label for="email">Email</label>
+      </div>
+      <div class="input-field col s12 m6">
+        <input required="true" class="validate" type="tel" name="telefone" value="<%= data.usuario[i2].telefone %>">
+        <label for="telefone">Telefone</label>
+      </div>
+      <div class="col s12 m6">
+        <label>Nível</label>
+        <select required="true" class="browser-default" name="nivel">
+          <option value="" disabled selected>Selecione</option>
+          <option value="1" <%= 1 == data.usuario[i2].nivel ? 'selected="true"' : '' %>>Administrador</option>
+          <option value="2" <%= 2 == data.usuario[i2].nivel ? 'selected="true"' : '' %>>Gerente</option>
+          <option value="3" <%= 3 == data.usuario[i2].nivel ? 'selected="true"' : '' %>>Funcionário</option>
+        </select>
+      </div>
+      <div class="col s12 m6">
+        <label>Setor</label>
+        <select required="true" class="browser-default" name="id_setor">
+          <option value="" disabled selected>Selecione</option>
+          <%
+          if (typeof data.setores != 'undefined' && data.setores.length > 0) {
+            for (var i = data.setores.length - 1; i >= 0; i--) {
+          %>
+          <option value="<%= data.setores[i].id %>" <%= data.setores[i].id == data.usuario[i2].id_setor ? 'selected="true"' : '' %>><%= data.setores[i].nome %></option>
+          <%
+            }
+          }
+          %>
+        </select>
+      </div>
+    </div>
+    <div class="right-align">
+      <button data-href="/sistema/usuarios/atualizar/" data-action="/sistema/usuarios/" class="btn waves-effect waves-light blue darken-2 ajax-submit">
+        Salvar <i class="fa fa-floppy-o" aria-hidden="true"></i>
+      </button>
+    </div>
+    <%
+      }
+    }
+    %>
+  </form>
+</div>

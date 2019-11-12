@@ -1,0 +1,47 @@
+<div class="alterar_senha white-text">
+
+	<div class="container-fluid text-center">
+		<form method="POST" action="" enctype="multipart/form-data">
+
+
+			<div class="row margin-t-20">
+				<div class="form-group col-sm-12">
+					<div class="row">
+						<label class="white-text col-sm-2" for="valor">Senha Atual</label>
+						<div class="col-sm-10">
+							<input required="true" class="validate form-control" type="password" name="senha_atual" id="senha_atual">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-12">
+					<div class="row">
+						<label class="white-text col-sm-2" for="valor">Nova Senha</label>
+						<div class="col-sm-10">
+							<input required="true" class="validate form-control" type="password" name="senha" id="alterar_senha">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-12">
+					<div class="row">
+						<label class="white-text col-sm-2" for="valor">Confirme a Nova Senha</label>
+						<div class="col-sm-10">
+							<input required="true" class="validate form-control" type="password" id="confirmar_alterar_senha">
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<button data-href="/sistema/meus_dados/alterar-senha" data-action="<%= data.link_sistema%>/meus_dados/" class="btn primary ajax-submit margin-b-10" data-mensagem-sucesso="Senha Alterada com Sucesso!">
+				Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+			</button>
+
+		</form>
+	</div>
+</div>

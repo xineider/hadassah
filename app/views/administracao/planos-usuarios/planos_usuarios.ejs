@@ -1,0 +1,179 @@
+<div class="col s12 padding-0">
+	<div class="bold f25 margin-l-20 border-bottom-gold margin-b-10">
+		Administração de Planos dos Usuários
+		<i class="fas fa-comment-dollar right margin-r-20 gold-text"></i>
+	</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+
+	<div class="col s12">
+
+		<div class="row center-align">
+			<a class="btn gold ajax-load" href="<%= data.link_sistema%>/administracao/planos_usuarios_extrato/">Acessar Extrato Usuários</a>
+		</div>
+
+
+
+		<table class="table-full-width tabela_filtrada">
+			<thead class="gold-text">
+				<tr>
+					<th>Nome</th>
+					<th>Valor Total Aplicação</th>
+					<th>Valor Total Rendimento</th>
+					<th>Saque</th>
+					<th>Conservador Aplicação</th>
+					<th>Conservador Rendimento</th>
+					<th>Moderado Aplicação</th>
+					<th>Moderado Rendimento</th>
+					<th>Arrojado Aplicação</th>
+					<th>Arrojado Rendimento</th>
+					<th>Agressivo Aplicação</th>
+					<th>Agressivo Rendimento</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<%
+				if (typeof data.planos != 'undefined' && data.planos.length > 0) {
+					for (var i = 0; i < data.planos.length; i++) { %>
+
+					<tr>
+						<td>
+							<span class="limitador_3_linhas white-text">
+								<%= data.planos[i].nome %>
+							</span> 
+						</td>
+
+						<td>
+							<span class="limitador_3_linhas white-text">
+								 <span class="hide"><%= data.planos[i].aporte_total_stable_double %></span>
+								<%= data.planos[i].aporte_total_stable %>
+							</span> 
+							<br>
+							<span class="limitador_3_linhas gold-text">
+								R$<%= data.planos[i].aporte_total_reais %>
+							</span> 
+						</td>
+
+						<td>
+							<span class="limitador_3_linhas white-text">
+								<%= data.planos[i].rendimento_total_stable %>
+							</span>
+							<br>
+							<span class="limitador_3_linhas gold-text">
+								R$<%= data.planos[i].rendimento_total_reais %>
+							</span> 
+						</td>
+
+						<td>
+							<span class="limitador_3_linhas white-text">
+								<%= data.planos[i].saque_total %>
+							</span> 
+							<br>
+							<span class="limitador_3_linhas gold-text">
+								R$<%= data.planos[i].saque_total_reais %>
+							</span> 
+						</td>
+
+						<td>
+							<span class="limitador_3_linhas white-text">
+								<%= data.planos[i].conservador_aporte_total_stable %>
+							</span> 
+							<br>
+							<span class="limitador_3_linhas gold-text">
+								R$<%= data.planos[i].conservador_aporte_total_reais %>
+							</span>
+						</td>
+
+						<td>
+							<span class="limitador_3_linhas white-text">
+								<%= data.planos[i].conservador_rendimento_total_stable %>
+							</span>
+							<br>
+							<span class="limitador_3_linhas gold-text">
+								R$<%= data.planos[i].conservador_rendimento_total_reais %>
+							</span>
+						</td>
+						<td>
+							<span class="limitador_3_linhas white-text">
+								<%= data.planos[i].moderado_aporte_total_stable %>
+							</span> 
+							<br>
+							<span class="limitador_3_linhas gold-text">
+								R$<%= data.planos[i].moderado_aporte_total_reais %>
+							</span>
+						</td>
+
+						<td>
+							<span class="limitador_3_linhas white-text">
+								<%= data.planos[i].moderado_rendimento_total_stable %>
+							</span> 
+							<br>
+							<span class="limitador_3_linhas gold-text">
+								R$<%= data.planos[i].moderado_rendimento_total_reais %>
+							</span>
+						</td>
+						<td>
+							<span class="limitador_3_linhas white-text">
+								<%= data.planos[i].arrojado_aporte_total_stable %>
+							</span>
+							<br>
+							<span class="limitador_3_linhas gold-text">
+								R$<%= data.planos[i].arrojado_aporte_total_reais %>
+							</span>
+						</td>
+
+						<td>
+							<span class="limitador_3_linhas white-text">
+								<%= data.planos[i].arrojado_rendimento_total_stable %>
+							</span>
+							<br>
+							<span class="limitador_3_linhas gold-text">
+								R$<%= data.planos[i].arrojado_rendimento_total_reais %>
+							</span>
+						</td>
+						<td>
+							<span class="limitador_3_linhas white-text">
+								<%= data.planos[i].agressivo_aporte_total_stable %>
+							</span>
+							<br>
+							<span class="limitador_3_linhas gold-text">
+								R$<%= data.planos[i].agressivo_aporte_total_reais %>
+							</span>
+						</td>
+
+						<td>
+							<span class="limitador_3_linhas white-text">
+								<%= data.planos[i].agressivo_rendimento_total_stable %>
+							</span>
+							<br>
+							<span class="limitador_3_linhas gold-text">
+								R$<%= data.planos[i].agressivo_rendimento_total_reais %>
+							</span>
+						</td>
+						
+
+
+					</tr>
+
+					<%} 
+				}else{%>
+				<tr>
+					<td colspan="4" class="center">Não há planos no momento</td>
+				</tr>
+				<%}%>
+			</tbody>
+
+		</table>
+	</div>
+
+
+
+
+
+	<%}else{%>
+	<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+	<%}%>
+
+</div>

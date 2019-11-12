@@ -1,0 +1,55 @@
+<div>
+	<%- include('../submenu'); %>
+</div>
+
+<%if(usuario.nivel == 1){ %>
+<div class="container-fluid">
+	<div class="w100 text-center">
+		<div class="bold f25 text-center white-text margin-b-10">Aprovação de Saque</div>
+
+		<div class="row">
+			<div class="form-group col-md-3 f20 white-text">
+				Nome do Usuário: <span class="primary-text"><%= data.pedido_saque[0].nome_usuario %></span>
+			</div>
+			<div class="form-group col-md-3 f20 white-text">
+				Plano: <span class="primary-text"><%= data.pedido_saque[0].plano %></span>
+			</div>
+
+			<div class="form-group col-md-3 f20 white-text">
+				Valor: <span class="primary-text">R$<%= data.pedido_saque[0].valor_real %></span>
+			</div>
+
+			<div class="form-group col-md-3 f20 white-text">
+				<%if(data.pedido_saque[0].carteira != undefined){%>
+				Carteira: <span class="primary-text"><%= data.pedido_saque[0].carteira %></span>			
+
+				<%}else{%>
+				<div class="text-center">Cliente não possui carteira!</div>
+				<%}%>
+			</div>
+		</div>
+
+		<div class="row text-center margin-b-10">
+
+			<div class="w100 mx-auto">
+
+				<button class="btn red ajax-load-to margin-t-10 margin-l-10" href="<%= data.link_sistema%>/administracao/pedido-saque/negacao_saque_motivo/<%= data.pedido_saque[0].id %>" data-to="container_aprovacao_negacao_saque">
+					Negar Saque
+				</button>
+
+				<button class="btn primary ajax-load-to margin-t-10 margin-l-10" href="<%= data.link_sistema%>/administracao/pedido-saque/aprovacao_saque_data_hora/<%= data.pedido_saque[0].id %>" data-to="container_aprovacao_negacao_saque">
+					Aprovar Saque
+				</button>
+			</div>
+		</div>
+
+
+		<div class="container_aprovacao_negacao_saque"></div>
+
+	</div>
+
+</div>
+
+<%}else{%>
+<div class="white-text text-center f25">Você não possui permissão para acessar esse conteúdo!</div>
+<%}%>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Moon</title>
+	<link rel="icon" type="image/png" sizes="32x32" href="/public/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/public/images/favicon-16x16.png">
+	<link rel='stylesheet' href='/public/stylesheets/fontawesome.min.css' />
+	<link rel='stylesheet' href='/public/stylesheets/bootstrap/bootstrap.css' />
+	<link rel='stylesheet' href='/public/stylesheets/bootstrap/bootstrap-datepicker.min.css' />
+
+	<link rel='stylesheet' href='/public/stylesheets/datatables.min.css' />
+	<link rel='stylesheet' href='/public/stylesheets/utils.css' />
+	<link rel='stylesheet' href='/public/stylesheets/style.css' />
+	<script src="/public/javascripts/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/pt-br.js"></script>
+	<script src="/public/javascripts/jquery.min.js"></script>
+	<script src="/public/javascripts/jquery.mask.js"></script>
+	<script src="/public/javascripts/popper.min.js"></script>
+	<script src="/public/javascripts/bootstrap/bootstrap.min.js"></script>
+	<script src="/public/javascripts/bootstrap/bootstrap-datepicker.min.js"></script>
+	<script src="/public/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+
+	<script src="/public/javascripts/fullcalendar.min.js"></script>
+	<script src="/public/javascripts/datatables.min.js"></script>
+	<script src="/public/javascripts/main.js"></script>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+</head>
+<body>
+	<input type="hidden" value="<%= usuario.id %>" name="id_usuario_sessao">
+	<input type="hidden" value="<%= usuario.hash_login %>" name="hash_usuario_sessao">
+	<input type="hidden" value="<%= usuario.nivel %>" name="nivel_usuario_sessao">
+	<div class="error_ajax none">Você parece ter se disconectado, tentando reconectar...</div>
+	<!-- Modal Structure -->
+	<div id="modaldeletar" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					<b><p id="texto">Remover</p></b>
+				</div>
+				<div class="modal-footer">
+					<div class="row">
+						<div class="col col-sm-6">
+							<button type="button" class="btn grey white-text" data-dismiss="modal">Cancelar</button>
+						</div>
+						<div class="col col-sm-6">
+							<form method="POST" action="">
+								<input id="id" type="hidden" name="id">
+								<input type="hidden" name="deletado" value="1">
+								<button style="width: 100%; text-align: center;" class="btn red white-text ajax-submit delete_button"
+								data-href=""
+								data-action="" data-dismiss="modal" data-mensagem-sucesso="" data-mensagem-sucesso-color="bg-danger"
+								>Excluir</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Structure -->
+	<div id="modalinfo" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+	<div class="loader none">
+		<i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+		<!-- <span class="sr-only">Loading...</span> -->
+	</div>
+
+	<header class="white-text container">
+		<div class="header-logo w100">
+			<img src="/public/images/logo.png">
+			<a class="logout block float-right" href="/logout" onclick="return confirm('Você deseja sair?');">
+				<i class="fas fa-sign-out-alt primary-text"></i>
+				<div class="white-text">Sair</div>
+			</a>
+
+			<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; top: 70px; right: 10px;">
+				<div class="toast-body">
+					Texto
+				</div>
+			</div>
+		</div>
+
+
+		<div class="header-info text-center margin-t-10">
+			Olá <span class="secondary-text"><%= usuario.nome %></span>.
+			<br>
+			Seu último acesso foi em 00/00 às 00h00.
+
+			<br>
+			<span class="secondary-text uppercase">
+
+				<% if (typeof data.primeiro_aporte != 'undefined' && data.primeiro_aporte.length > 0){ %>
+				Seu aporte inicial foi de <span class="white-text">R$<%= data.primeiro_aporte[0].valor%></span>
+				<%}else{%>
+				<span class="f20">Você não fez nenhum <span class="bold">aporte</span> <a >clique aqui</a> para fazer!</span>
+				<%}%>
+
+
+			</span>
+			<br>
+			<span class="white-text uppercase">
+				<% if (typeof data.saldo_atualizado != 'undefined' && data.saldo_atualizado.length > 0){ %>
+				Saldo Atualizado  R$<%= data.saldo_atualizado[0].saldo_atualizado %>
+				<%}else{%>
+				<span class="f20">Você não fez nenhum <span class="bold">aporte</span> <a >clique aqui</a> para fazer!</span>
+				<%}%>				
+			</span>
+		</div>
+
+		<div class="primary_line w90 margin-center margin-t-5"></div>
+
+		<div class="w90 header-plano uppercase white-text margin-t-10 margin-b-10">
+			<div class="row">
+				<div class="col text-center padding-b-10">
+					<span class="secondary-text f25">Meu Plano</span>
+					<br>
+					<% if (typeof data.plano != 'undefined' && data.plano.length > 0){ %>
+
+					<span class="uppercase f20"><%= data.plano[0].plano %></span>
+					<%}else{%>
+					<span class="uppercase">Nenhum plano atualmente!</span>
+					<%}%>
+				</div>
+				<div class="primary_line_vertical"></div>
+				<div class="col text-center padding-b-10">
+					<div class="w100">
+						<img src="/public/images/rocket.png" class="mw40">
+					</div>
+					<% if (typeof data.meses_decorridos != 'undefined' && data.meses_decorridos.length > 0){ %>
+					<span class="uppercase secondary-text f30"><%= data.meses_decorridos[0].meses_decorridos %> meses</span>
+					<br>
+					Decorridos do seu plano
+					<%}else{%>
+					<span class="uppercase">Nenhum plano atualmente!</span>
+					<%}%>
+
+
+				</div>
+			</div>
+
+
+
+		</div>
+
+		<nav class="w100 header-menu">
+			<%- include('menu_header'); %>
+		</nav>
+	</header>
+

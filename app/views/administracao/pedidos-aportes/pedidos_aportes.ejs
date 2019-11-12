@@ -1,0 +1,77 @@
+<div>
+	<%- include('../submenu'); %>
+</div>
+
+
+<div class="w100 text-center">
+	<div class="bold f25 text-center white-text">
+		Administração de Aprovação de Aporte
+	</div>
+	
+	
+	<%if(usuario.nivel == 1){ %>
+
+	<div class="col s12">
+
+		<table class="tabela_filtrada text-center white-text margin-center">
+			<thead class="primary-text">
+				<tr>
+					<th>Nome</th>
+					<th>Plano</th>
+					<th>Valor em Reais</th>
+					<th>Data Cadastro</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<%
+				if (typeof data.pedido_aporte != 'undefined' && data.pedido_aporte.length > 0) {
+					for (var i = data.pedido_aporte.length - 1; i >= 0; i--) { %>
+					<tr class="border-bottom-primary">
+						<td>
+							<a class="ajax-load white-text" href="<%= data.link_sistema%>/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
+								<%= data.pedido_aporte[i].nome %> 
+							</a>
+						</td>
+						<td>
+							<a class="ajax-load white-text" href="<%= data.link_sistema%>/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
+								<%= data.pedido_aporte[i].plano %> 
+							</a>
+						</td>
+						<td>
+							<a class="ajax-load white-text" href="<%= data.link_sistema%>/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
+								R$<%= data.pedido_aporte[i].valor_real %>
+							</a>
+						</td>
+
+						<td>
+							<a class="ajax-load white-text" href="<%= data.link_sistema%>/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
+								<span class="d-none"><%= data.pedido_aporte[i].data_table_filtro %></span>
+								<%= data.pedido_aporte[i].data_cadastro %>
+							</a>
+						</td>
+
+
+
+					</tr>
+
+					<%}
+				}else{%>
+				<tr>
+					<td colspan="4" class="text-center">Não há Pedidos de Aporte no momento</td>
+				</tr>
+				<%}%>
+			</tbody>
+
+		</table>
+	</div>
+
+
+
+
+
+	<%}else{%>
+	<div class="white-text text-center f25">Você não possui permissão para acessar esse conteúdo!</div>
+	<%}%>
+
+</div>

@@ -1,0 +1,48 @@
+<form method="POST" action="" enctype="multipart/form-data">
+  <div class="right-align">
+    <h4 class="left">Editar</h4>
+  <%
+  if (typeof data.usuario != 'undefined' && data.usuario.length > 0) {
+    for (var i2 = data.usuario.length - 1; i2 >= 0; i2--) {
+  %>
+    <button class="btn-floating btn-large waves-effect waves-light modal-action modal-close red darken-2">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="row">
+    <div class="center-align">
+      <div class="image-perfil db relative" style="background-image: url(/assets/imgs/user-padrao.jpg);">
+        <a href="" class="edit-image">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+    <input type="hidden" value="<%= data.usuario[i2].id %>" name="id">
+    <div class="input-field col s12 m6">
+      <input required="true" class="validate" type="text" name="nome" value="<%= data.usuario[i2].nome %>">
+      <label for="nome">Nome</label>
+    </div>
+    <div class="input-field col s12 m6">
+      <input required="true" class="validate" type="text" name="email" value="<%= data.usuario[i2].email %>">
+      <label for="email">Email</label>
+    </div>
+    <div class="input-field col s12 m6">
+      <input required="true" class="validate" type="tel" name="telefone" value="<%= data.usuario[i2].telefone %>">
+      <label for="telefone">Telefone</label>
+    </div>
+    <div class="input-field col s12 m6">
+      <input required="true" class="validate" type="password" name="senha" value="*********">
+      <label for="senha">Senha</label>
+    </div>
+  </div>
+  <div class="right-align">
+    <button data-href="/sistema/usuarios/atualizar/" class="btn waves-effect waves-light blue darken-2 ajax-submit">
+      Salvar <i class="fa fa-floppy-o" aria-hidden="true"></i>
+    </button>
+  </div>
+  <%
+    }
+  }
+  %>
+  </div>
+</form>

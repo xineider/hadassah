@@ -1,0 +1,33 @@
+<div class="input-field col s12">
+	<label class="gold-text" for="qtd_btc">Quantidade de BTC</label>
+	<input class="validate border-gold border-radius-5 white-text" type="number" name="qtd_btc">
+</div>
+
+<input type="hidden" name="status" value="Aprovado">
+
+
+<div class="row uploads word-wrap">
+	<div class="file-field input-field col s12">
+		<div class="btn gold">
+			<span>Anexar Comprovante</span>
+			<input type="file" data-href="/sistema/financeiro/novo_aporte/uploadarcomprovante" id="arquivo" data-container="comprovante_container" class="arquivo_comprovante" accept="image/*,application/pdf">
+		</div>
+		<div class="file-path-wrapper hide">
+			<input class="file-path validate" type="text" placeholder="Ou arraste seu arquivo aqui">
+		</div>
+	</div>
+
+	<div class="comprovante_container">
+	</div>
+</div>
+
+<div class="input-field col s12">
+	<span class="gold-text">Data</span>
+	<input name="dia_convertido_stable" class="datepicker border-gold border-radius-5 white-text" required="true">
+</div>
+
+<div class="input-field col s12">
+	<span class="gold-text">Hora</span>
+	<input name="hora_convertido_stable" class="timepicker border-gold border-radius-5 white-text hora_selecionar_aprovacao" required="true">
+</div> 
+

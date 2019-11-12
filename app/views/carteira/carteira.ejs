@@ -1,0 +1,89 @@
+<div class="carteira">
+	<ul class="nav white-text justify-content-center sub_menu">
+		<%
+		if (typeof data.meses_com_caixa != 'undefined' && data.meses_com_caixa.length > 0) {
+			for (var i = 0; i < data.meses_com_caixa.length; i++) { %>
+			<li class="nav-item uppercase">
+				<a class="ajax-load-to nav-link <%= data.meses_com_caixa[i].numero_mes == data.mes_ativo ? 'active' : '' %>" href="<%= data.link_sistema%>/carteira/ver-carteira-mes/<%= data.meses_com_caixa[i].numero_mes %>" data-to="carteira">
+					<%= data.meses_com_caixa[i].nome_mes %>
+				</a>
+			</li>
+
+
+			<%}
+		}%>
+	</ul>
+
+	<div class="carteira_mes">
+	
+		<div class="grey carteira_saldo_final_mes w100 white-text text-center padding-20">
+			<span class="primary-text f40">R$ <%= data.ultimo_saldo[0].valor_saldo %></span><br>
+			<%if (data.mesmo_mes != 'undefined' && data.mesmo_mes == data.mes_ativo){%>
+			<span class="grey-text uppercase">Saldo Atual</span>
+			<%}else{%>
+			<span class="grey-text uppercase">Saldo Final de <%= data.nome_mes[0].nome_mes %></span>
+
+			<%} %>
+		</div>
+
+		<div class="carteira_container">
+			<div class="container-fluid">
+
+				<%
+				if (typeof data.caixa != 'undefined' && data.caixa.length > 0) {
+					for (var i = 0; i < data.caixa.length; i++) { %>
+
+
+
+					<div class="row uppercase padding-tb-10">
+						<div class="carteira_linha_dados_tipo <%= data.caixa[i].nomeCor %>"> 
+							<%= data.caixa[i].dia%> 
+							<%if (data.caixa[i].confirmado == 0){%>
+							<i class="far fa-clock"></i>
+							<%}else if(data.caixa[i].confirmado == 2){ %>
+							<i class="fas fa-exclamation-triangle"></i>
+							<%}else if(data.caixa[i].tipo_numero == 0 && data.caixa[i].confirmado == 1){%>
+							<i class="fas fa-coins"></i>
+							<%}else if((data.caixa[i].tipo_numero == 1 || data.caixa[i].tipo_numero == 3) && data.caixa[i].confirmado == 1){%>
+							<i class="fas fa-hand-holding-usd"></i>
+							<%}else if(data.caixa[i].tipo_numero == 2 && data.caixa[i].confirmado == 1){%>
+							<i class="fas fa-poll"></i>
+							<%}else if(data.caixa[i].tipo_numero == 4 && data.caixa[i].confirmado == 1){%>
+							<i class="fas fa-redo"></i>
+							<%}%>
+							<span class="grey-text"><%= data.caixa[i].tipo%></span>
+						</div>
+						<div class="carteira_linha_preco">
+							<div class="float-left f25 grey-text text-right">
+								<% if((data.caixa[i].tipo_numero == 0 || data.caixa[i].tipo_numero == 2 || data.caixa[i].tipo_numero == 4) && data.caixa[i].confirmado == 1){%>
+								+<%} else if((data.caixa[i].tipo_numero == 1 || data.caixa[i].tipo_numero == 3) && data.caixa[i].confirmado == 1){%>-
+								<%}%> R$ <%= data.caixa[i].valor_real%>
+							</div>
+
+							<div class="float-right margin-l-5 <%= data.caixa[i].nomeCor %>">
+								<%if(data.caixa[i].confirmado == 0 || data.caixa[i].confirmado == 2 ){%>
+								<i class="fas fa-circle f20"></i>
+								<%}else if((data.caixa[i].tipo_numero == 0 || data.caixa[i].tipo_numero == 2 || data.caixa[i].tipo_numero == 4) && data.caixa[i].confirmado == 1){%>
+								<i class="fas fa-sort-up f35"></i>
+								<%}else if((data.caixa[i].tipo_numero == 1 || data.caixa[i].tipo_numero == 3) && data.caixa[i].confirmado == 1){%>
+								<i class="fas fa-sort-down f35"></i>
+								<%}%>
+							</div>
+						</div>
+
+					</div>
+
+
+					<%}
+				}%>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div class="carteira_botoes_container margin-b-10 margin-t-10">
+		<div class="container-fluid">
+			<%- include('carteira_botoes'); %>
+		</div>
+	</div>

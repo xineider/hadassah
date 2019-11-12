@@ -1,0 +1,57 @@
+<div class="card-panel white">
+  <div class="header row">
+    <h4>Usuários</h4>
+    <div class="right-align">
+      <a class="btn-floating btn-large waves-effect waves-light blue darken-2 right ajax-load" href="/sistema/usuarios/criar"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    </div>
+  </div>
+  <ul class="collapsible popout" data-collapsible="accordion, expandable">
+    <%
+    if (typeof data != 'undefined' && data.length > 0) {
+      for (var i = data.length - 1; i >= 0; i--) {
+    %>
+    <li>
+      <div class="collapsible-header position TarefaLoad" data-id="<%= data[i].id %>">
+        <%= data[i].nome %>
+        <span class="right-position">
+          <a href="/sistema/usuarios/editar/<%= data[i].id %>" class="ajax-load"><i class="fa fa-pencil-square-o green-text text-darken-2" aria-hidden="true"></i></a>
+          <i class="fa fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data[i].nome %>'? " data-to="/sistema/usuarios/desativar" data-back="/sistema/usuarios" aria-hidden="true"></i>
+        </span>
+      </div>
+      <div class="collapsible-body">
+        <div class="row">
+          <div class="col s12 m6">
+            <ul>
+              <li>
+                <b>Login:</b> <%= data[i].login %>
+              </li>
+              <li>
+                <b>Nome:</b> <%= data[i].nome %>
+              </li>
+              <li>
+                <b>Email:</b> <%= data[i].email %>
+              </li>
+            </ul>
+          </div>
+          <div class="col s12 m6">
+            <ul>
+              <li>
+                <b>Telefone:</b> <%= data[i].telefone %>
+              </li>
+              <li>
+                <b>Nível:</b> <%= data[i].nivel == 2 ? 'Gerente' : 'Funcionário' %>
+              </li>
+              <li>
+                <b>Setor:</b> <%= data[i].setor %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+    <%
+      }
+    }
+    %>
+  </ul>
+</div>

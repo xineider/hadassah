@@ -1,0 +1,192 @@
+<div class="col s12 padding-0">
+	<div class="bold f25 margin-l-20 border-bottom-gold margin-b-10">
+		Administração dos Extrato dos Usuários
+		<i class="fas fa-file-invoice-dollar right margin-r-20 gold-text"></i>
+	</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+
+	<%
+	if (typeof data.valores_totais_usuarios != 'undefined' && data.valores_totais_usuarios.length > 0) {
+		for (var i = 0; i < data.valores_totais_usuarios.length; i++) { %>
+
+		<div class="col s12">
+			<div class="col s12 border-gold border-radius-5 center-align margin-b-30">
+				<div class="col s12 light-font f30 gold-text">
+					<%=data.valores_totais_usuarios[i].nome %> - <%=data.valores_totais_usuarios[i].login%> -  <%=data.valores_totais_usuarios[i].id%>
+				</div>
+				<div class="col s6 margin-t-20">
+					<div class="f18 bold">
+						Valor Total: 
+						<br><%=data.valores_totais_usuarios[i].aporte_total_stable %>
+					</div>
+					<div class="gold-text f18 margin-t-5">
+						R$ <%=data.valores_totais_usuarios[i].aporte_total_reais %>
+					</div>
+				</div>
+				<div class="col s6 margin-t-20">
+					<div class="f18 bold">
+						Rendimento Total 
+						<br><%=data.valores_totais_usuarios[i].rendimento_total_stable %>
+					</div>
+					<div class="gold-text f18 margin-t-5">
+						R$ <%=data.valores_totais_usuarios[i].rendimento_total_reais %>
+					</div>
+				</div>
+
+				<div class="col s12 bold margin-t-10 f20 border-top-gold">
+					EXTRATO
+				</div>
+
+				<table class="table-full-width margin-b-20">
+					<thead>
+						<tr class="border-bottom-gold">
+							<th class="gold-text">Data</th>
+							<th class="gold-text">Operação</th>
+							<th class="gold-text">Plano</th>
+							<th class="gold-text">Valor</th>
+							<th class="gold-text">Status</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<%
+						if (typeof data.extrato_todos != 'undefined' && data.extrato_todos.length > 0) {
+							for (var j = 0; j < data.extrato_todos.length; j++) { 
+								%>
+
+								
+								<% if(data.extrato_todos[j].id_usuario == data.valores_totais_usuarios[i].id){%>
+
+
+								<tr class="border-bottom-gold">
+									<td><%= data.extrato_todos[j].data_cadastro %></td>
+									<td><%= data.extrato_todos[j].mensagem %>
+										<!-- Se tiver comprovante e for saque mostrar -->
+										<%if(data.extrato_todos[j].arquivo != null && (data.extrato_todos[j].tipo == 1 || data.extrato_todos[j].tipo == 3)){%>
+										<a class="f16" href="<%= data.extrato_todos[j].arquivo %>" download>
+											<i class="fas fa-file-pdf gold-text"></i>
+										</a>
+										<%}%>
+									</td>
+									<td><%= data.extrato_todos[j].nome_plano %></td>
+									<td class="center-align">
+										<!-- Se for um conversão do tipo BTC/TETHER(Novos) ou seja foi aprovado o aporte, ou se for um aporte que foi negado ou está aguardando então deve mostrar o BTC-->
+										<% if(data.extrato_todos[j].tipo_conversao == 0 || ((data.extrato_todos[j].confirmado == 0 || data.extrato_todos[j].confirmado == 2) && data.extrato_todos[j].tipo == 0)){%>
+										BTC <%= data.extrato_todos[j].qtd_btc %>
+										<!-- Se for uma conversão do tipo REAL/TETHER(Antigo), ou se for um Rendimento, ou se é um saque então deve mostrar o Tether -->
+										<%}else if(data.extrato_todos[j].tipo_conversao == 1 || 
+										data.extrato_todos[j].tipo == 2 || data.extrato_todos[j].tipo == 1 || data.extrato_todos[j].tipo == 3){%>
+										Tether <%= (data.extrato_todos[j].tipo == 0 || data.extrato_todos[j].tipo == 2) ? '+':'-' %><%= data.extrato_todos[j].qtd_stable %>
+										<%}%>			
+									</td>
+									<td>
+										<!-- se tiver stable ou seja tudo tem que ter stable e for aporte e e for alguma conversao -->
+										<% if(data.extrato_todos[j].qtd_stable != null && data.extrato_todos[j].tipo == 0 && data.extrato_todos[j].tipo_conversao != null){%>
+										<div style="min-width: 200px;">
+											<div class="white-text margin-t-5 f12 light-font">
+												Conversão <%= data.extrato_todos[j].tipo_conversao == 0 ? 'BTC/TETHER' : 'REAL/TETHER'%> em <%= data.extrato_todos[j].dia_convertido_stable %> às <%= data.extrato_todos[j].hora_convertido_stable %>
+											</div>
+											<div>	
+
+												<% if(data.extrato_todos[j].tipo_conversao == 0){%>
+
+												<div class="inline center-align">
+													BTC
+													<br>
+													<%= data.extrato_todos[j].qtd_btc %>
+												</div>
+												<i class="fas fa-long-arrow-alt-right gold-text f25 margin-r-5 margin-l-5"></i>
+												<div class="inline center-align">
+													Tether
+													<br>
+													<%= data.extrato_todos[j].qtd_stable %>
+												</div>	
+
+												<div class="gold-text f12 margin-t-5 light-font">
+													Conversão Direta: R$ <%= data.extrato_todos[j].qtd_real_convertido %>
+												</div>
+
+												<%}%>	
+
+												<% if(data.extrato_todos[j].tipo_conversao == 1){%>		
+												<div class="inline center-align">
+													Real
+													<br>
+													R$<%= data.extrato_todos[j].valor %>
+												</div>
+												<i class="fas fa-long-arrow-alt-right gold-text f25 margin-r-5 margin-l-5"></i>
+												<div class="inline center-align">
+													Tether
+													<br>
+													<%= data.extrato_todos[j].qtd_stable %>
+												</div>	
+												<%}%>
+
+											</div>
+
+										</div>
+										<%}%>
+
+
+
+										<!-- se tiver btc e for saque -->
+
+										<% if(data.extrato_todos[j].qtd_btc != null && data.extrato_todos[j].tipo == 1){%>
+										<div class="gold-text margin-t-5">
+											BTC + <%= data.extrato_todos[j].qtd_btc %>
+										</div>
+										<%}%>
+
+										<!-- Se for rendimento mostrar o valor em Reais -->
+										<% if(data.extrato_todos[j].tipo == 2){ %>
+										<div class="gold-text f12 margin-t-5 light-font">
+											Conversão Direta: R$ <%= data.extrato_todos[j].qtd_real_convertido %>
+										</div>
+
+										<%}%>
+
+										<!-- se for ainda em aguardando aprovação ou se foi negado -->
+
+										<% if(data.extrato_todos[j].confirmado == 0){%>
+
+										<span class="bold yellow-text text-lighten-1">Aguardando Aprovação</span>
+
+
+										<%}else if(data.extrato_todos[j].confirmado == 2){%>
+										<span class="bold red-text text-lighten-1">Cancelado: <%= data.extrato_todos[j].status %></span>
+
+										<%}%>
+
+									</td>
+								</tr>
+
+
+
+								<%}%>
+
+
+								<%
+							}
+						}%>
+
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+
+
+		<%}
+	}%>
+
+
+
+
+
+	<%}else{%>
+	<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+	<%}%>
+
+</div>

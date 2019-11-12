@@ -1,0 +1,130 @@
+<div class="meus_dados white-text">
+
+	<div class="container-fluid text-center">
+		<form method="POST" action="" enctype="multipart/form-data">
+			<div class="row margin-t-10 text-left">
+				<div class="col">
+					<span class="secondary-text">NOME: </span><span class="grey-text"><%= data.usuario[0].nome%></span>
+				</div>
+				<div class="col">
+					<span class="secondary-text">CPF: </span> <span class="grey-text"><%= data.usuario[0].cpf%></span>
+				</div>
+			</div>
+
+
+			<div class="row margin-t-10 text-left">
+				<div class="form-group col-sm-12">
+					<div class="row">
+
+						<label class="secondary-text col-sm-2" for="email">E-mail:</label>
+						<div class="col-sm-10">
+							<input required="true" class="form-control " type="text" name="email" value="<%= data.usuario[0].email %>">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group col-sm-12">
+					<div class="row">
+						<label class="secondary-text col-sm-2" for="telefone">Celular:</label>
+						<div class="col-sm-10">
+							<input required="true" class="form-control " type="text" name="telefone" value="<%= data.usuario[0].telefone %>">
+						</div>						
+					</div>
+				</div>
+
+			</div>
+
+			<button data-href="/sistema/meus_dados/atualizar" data-action="<%= data.link_sistema%>/meus_dados/" class="btn primary ajax-submit margin-b-10" data-mensagem-sucesso="Usuario Atualizado com Sucesso!" >
+				Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+			</button>
+
+		</form>
+
+
+		<button class="btn black uppercase ajax-load" href="/sistema/meus_dados/alterar-senha">Alterar Senha</button>
+
+	</div>
+
+	<div class="container-fluid border-primary text-center margin-t-10 border-radius-10 margin-b-10">
+
+		<div class="f20">Minhas Carteiras/Conta Bancária</div>
+
+		<a class="ajax-load btn primary margin-t-10 margin-b-10" href="/sistema/meus_dados/adicionar_conta_bancaria">Adicionar Carteira/Conta Bancária</a>
+
+
+		<table class="tabela_filtrada text-center white-text margin-center">
+			<thead class="primary-text">
+				<tr>
+					<th>Nome do Banco</th>
+					<th>Tipo da Conta</th>
+					<th>Agência</th>
+					<th>Conta</th>
+					<th>Padrão</th>
+					<th>Excluir</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<%
+				if (typeof data.conta_bancaria != 'undefined' && data.conta_bancaria.length > 0) {
+					for (var i = data.conta_bancaria.length - 1; i >= 0; i--) { %>
+					<tr class="border-bottom-primary">
+						<td>
+							<a class="ajax-load white-text" href="<%= data.link_sistema%>/meus_dados/conta_bancaria/editar/<%= data.conta_bancaria[i].id %>">
+								<%= data.conta_bancaria[i].nome_banco %> 
+							</a>
+						</td>
+						<td>
+							<a class="ajax-load white-text" href="<%= data.link_sistema%>/meus_dados/conta_bancaria/editar/<%= data.conta_bancaria[i].id %>">
+								<%= data.conta_bancaria[i].nome_tipo_conta %> 
+							</a>
+						</td>
+						<td>
+							<a class="ajax-load white-text" href="<%= data.link_sistema%>/meus_dados/conta_bancaria/editar/<%= data.conta_bancaria[i].id %>">
+								<%= data.conta_bancaria[i].agencia %>
+							</a>
+						</td>
+						<td>
+							<a class="ajax-load white-text" href="<%= data.link_sistema%>/meus_dados/conta_bancaria/editar/<%= data.conta_bancaria[i].id %>">
+								<%= data.conta_bancaria[i].numero_conta %>
+							</a>
+						</td>
+
+						<td>
+							<a class="ajax-load white-text" href="<%= data.link_sistema%>/meus_dados/conta_bancaria/editar/<%= data.conta_bancaria[i].id %>">
+								<% if(data.conta_bancaria[i].padrao == 1){%>
+								<i class="fas fa-check primary-text"></i>
+								<%}%>
+							</a>
+						</td>
+						<td class="text-center">
+							<% if(usuario.nivel == 1){ %>
+
+							<div class="btn primary modal-remover-mount pointer" data-modal="#modaldeletar" data-id="<%= data.conta_bancaria[i].id %>" data-texto="Você tem certeza que quer deletar a conta Bancária '<%= data.conta_bancaria[i].numero_conta %>?'  " data-to="/sistema/meus_dados/conta_bancaria/desativar" data-back="<%= data.link_sistema%>/meus_dados/" data-mensagem-sucesso="Conta Bancária Deletada com Sucesso!" data-toggle="tooltip" data-placement="top" title="Deletar Conta Bancária">
+								<i class="fas fa-times white-text"></i>
+							</div>
+
+							<% } %>
+						</td>
+
+					</tr>
+
+					<%}
+				}else{%>
+				<tr>
+					<td colspan="6" class="center">Não há contas bancárias no momento</td>
+				</tr>
+				<%}%>
+			</tbody>
+
+		</table>
+
+
+	</div>
+	
+	
+	
+	
+
+
+</div>

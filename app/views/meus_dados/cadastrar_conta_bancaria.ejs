@@ -1,0 +1,96 @@
+<div class="container-fluid">
+	<div class="w100">
+		<div class="bold f25 text-center white-text margin-b-10">Adicionar Conta Bancária</div>
+
+		<form method="POST" action="" enctype="multipart/form-data">
+
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="row">
+						<label class="white-text col-sm-2" for="tipo">Banco</label>
+						<div class="col-sm-10">
+							<select name="id_banco" class="form-control">
+								<%
+								if (typeof data.bancos != 'undefined' && data.bancos.length > 0) {
+									for (var i = 0; i < data.bancos.length; i++) { %>
+									<option value=" <%= data.bancos[i].id %>"><%= data.bancos[i].banco %></option>				
+									<% }
+								} %>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<div class="row">
+						<label class="white-text col-sm-2" for="id_usuario">Agência</label>
+						<div class="col-sm-10">
+							<input required="true" class="validate form-control " type="text" name="agencia">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="form-group col-md-8">
+					<div class="row">
+						<label class="white-text col-sm-2" for="valor">N° da Conta</label>
+						<div class="col-sm-10">
+							<input required="true" class="validate form-control " type="text" name="numero_conta">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group col-md-4">
+					<div class="row">
+						<label class="white-text col-sm-2" for="valor">Dígito</label>
+						<div class="col-sm-10">
+							<input required="true" class="validate form-control " type="text" name="digito" maxlength="2">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<label class="white-text padding-l-15">Tipo da Conta:</label>
+				
+				<div>
+					<div class="form-check-inline white-text margin-l-10">
+						<input class="form-check-input" type="radio" name="tipo_conta" id="radio_conta_corrente" value="0" checked>
+						<label class="form-check-label" for="radio_conta_corrente">
+							Conta Corrente
+						</label>
+					</div>
+					<div class="form-check-inline white-text">
+						<input class="form-check-input" type="radio" name="tipo_conta" id="radio_conta_poupanca" value="1">
+						<label class="form-check-label" for="radio_conta_poupanca">
+							Conta Poupança
+						</label>						
+					</div>
+				</div>
+			</div>
+
+			<div class="row margin-b-10">
+				<div class="padding-l-15">
+					<div class="form-check white-text padding-l-15">
+
+						<% if (typeof data.tem_padrao != 'undefined' && data.tem_padrao.length > 0){ %>
+						<%}else{%>
+						<label class="form-check-label" for="conta_bancaria_padrao">
+							<input class="form-check-input" type="checkbox" value="1" id="conta_bancaria_padrao" name="padrao" checked>
+							Esta é a minha conta padrão
+						</label>
+						<%}%>
+					</div>
+				</div>
+			</div>
+
+
+			<button data-href="/sistema/meus_dados/conta_bancaria/cadastrar" data-action="<%= data.link_sistema%>/meus_dados/" class="btn primary ajax-submit margin-b-10" data-mensagem-sucesso="Conta Bancária Cadastrada com Sucesso!" >
+				Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+			</button>
+
+		</form>
+	</div>
+
+</div>
