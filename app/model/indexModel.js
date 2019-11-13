@@ -114,6 +114,17 @@ class IndexModel {
 			});
 	}
 
+	GetEmpresas() {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.*,\
+			 	(SELECT b.descricao FROM segmento as b WHERE b.id = a.id_segmento AND b.deletado = ?) as segmento, \
+			 	(SELECT c.sigla FROM regiao as c WHERE c.id = a.id_regiao AND c.deletado = ?) as regiao \
+				FROM empresa as a WHERE a.deletado = ?',[0,0,0]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
 	CadastrarLog(POST) {
 		var cadastrarLog = [];
 		cadastrarLog.ip = POST[0];

@@ -1,0 +1,114 @@
+
+<div class="container-fluid">
+	<div class="w100 text-center margin-t-10">
+		
+		<form method="POST" action="" enctype="multipart/form-data">
+
+			<input type="hidden" name="empresa[id]" value="<%= data.empresa[0].id %>">
+			<input type="hidden" name="empresa[id_usuario]" value="<%=usuario.id%>">
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="row">
+						<label class="grey-text col-sm-2" for="empresa[id_segmento]">Segmento</label>
+						<div class="col-sm-10">
+							<select name="empresa[id_segmento]" class="form-control tipo_caixa_select">
+								<%
+								if (typeof data.segmento != 'undefined' && data.segmento.length > 0) {
+									for (var i = 0; i < data.segmento.length; i++) { %>
+									<option value="<%= data.segmento[i].id %>" <%= data.empresa[0].id_segmento == data.segmento[i].id ? 'selected' : '' %>><%= data.segmento[i].descricao %></option>				
+									<% }
+								} %>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<div class="row">
+						<label class="grey-text col-sm-2" for="id_regiao">Região</label>
+						<div class="col-sm-10">
+							<select name="empresa[id_regiao]" class="form-control">
+								<%
+								if (typeof data.regiao != 'undefined' && data.regiao.length > 0) {
+									for (var i = 0; i < data.regiao.length; i++) { %>
+									<option value="<%= data.regiao[i].id %>" <%= data.empresa[0].id_regiao == data.regiao[i].id ? 'selected' : '' %>><%= data.regiao[i].sigla %></option>				
+									<% }
+								} %>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="row">
+						<label class="grey-text col-sm-2" for="empresa[faturamento]">Faturamento</label>
+						<div class="col-sm-10">
+							<input class="validate form-control " type="number" name="empresa[faturamento]" value="<%= data.empresa[0].faturamento %>">
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<div class="row">
+						<label class="grey-text col-sm-2" for="empresa[valor]">Ebitida</label>
+						<div class="col-sm-10">
+							<input class="validate form-control " type="text" name="empresa[ebitida]" value="<%= data.empresa[0].ebitida %>">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="form-group col-md-6">
+					<div class="row">
+						<label class="grey-text col-sm-2" for="empresa[valor_venda]">Valor Venda</label>
+						<div class="col-sm-10">
+							<input class="validate form-control" type="number" name="empresa[valor_venda]" value="<%= data.empresa[0].valor_venda %>">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group col-md-6">
+					<div class="row">
+						<label class="grey-text col-sm-2" for="empresa[consult]">Consult</label>
+						<div class="col-sm-10">
+							<input class="validate form-control" type="text" name="empresa[consult]" value="<%= data.empresa[0].consult %>">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="form-group col-md-12">
+					<div class="row">
+						<label class="grey-text col-sm-1" for="empresa[com]">COM -</label>
+						<div class="col-sm-11">
+							<input class="validate form-control" type="text" name="empresa[com]" value="<%= data.empresa[0].com %>">
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row observacoes_lista">
+				<%- include('observacoes_lista_todos_editar'); %>
+			</div>
+
+			<div class="row margin-b-10">
+				<div class="col-md-12 text-center">
+					<button class="btn secondary ajax-add-to" data-href="/sistema/empresa/adicionar/observacao" data-to="observacoes_lista">Adicionar outra Observação</button>
+				</div>
+			</div>
+
+			<a class="btn ajax-load grey" href="/sistema">Voltar</a>
+
+			<button data-href="/sistema/empresa/atualizar" data-action="/sistema" class="btn primary ajax-submit" data-mensagem-sucesso="Empresa Atualizada com Sucesso!">
+				Atualizar Empresa <i class="far fa-save-o" aria-hidden="true"></i>
+			</button>
+
+		</form>
+	</div>
+
+</div>

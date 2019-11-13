@@ -19,6 +19,10 @@ html{
 	overflow: hidden;
 }
 
+.primary-text{
+	color: #d4a867;
+}
+
 .icon-box{
 	width: 90%;
 	margin: auto;
@@ -44,15 +48,14 @@ html{
 
 .input-field input{
 	background: transparent;
-	border:none;
+	border:1px solid #d4a867;
 	color: #ffffff;
-	border-radius: 0;
-	border-bottom:0;
+	border-radius: 5px;
 	outline: none;
-	height: 3rem;
-	width: 100%;
+	height: 2rem;
+	width: calc(100% - 130px);
 	font-size: 16px;
-	padding: 0;
+	padding:0 10px;
 	-webkit-box-shadow: none;
 	box-shadow: none;
 	-webkit-box-sizing: content-box;
@@ -90,7 +93,7 @@ html{
 	padding: 10px;
 	&:hover,&:focus{
 		background:#fff;
-		color:#c3141b;
+		color:#d4a867;
 	};
 }
 
@@ -132,16 +135,33 @@ html{
 }
 
 .primary{
-	background: #c3141b;
-	background: -moz-linear-gradient(45deg, #c3141b 0%, #ec1550 50%, #f4811e 100%);
-	background: -webkit-linear-gradient(45deg, #c3141b 0%,#ec1550 50%,#f4811e 100%);
-	background: linear-gradient(45deg, #c3141b 0%,#ec1550 50%,#f4811e 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3141b', endColorstr='#f4811e',GradientType=1 );
+	background:#d4a867;
 }
 
 .primary_line{
 	height: 2px;
-	width: 100%;
+	width: 80%;
+	background:#d4a867;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+.primary_line_v{
+	position: absolute;
+	top: -2px;
+	right: 3px;
+	background:#d4a867;
+	width: 2px;
+	height: 25px;
+}
+
+.relative{
+	position: relative;
+}
+
+.label_form{
+	display: inline-block;
+	padding: 0 10px;
 }
 
 

@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
 	console.log('estou aqui no ready do começo');
-	adicionarLoader();
+	//adicionarLoader();
 	FormatInputs();
 	
 
@@ -50,9 +50,21 @@ $(document).ready(function () {
 		LoadTo(link, to);
 	});
 
+	$(document).on('click', '.ajax-add-to', function(e) {
+		e.preventDefault();
+		var link = $(this).data('href');
+		var to = $(this).data('to');
+		AddTo(link, to);
+	});
+
 	$(document).on('click', '.remove', function (e) {
 		e.preventDefault();
 		$(this).closest('.pai').remove();
+	});
+
+	$(document).on('click', '.remove_lista', function (e) {
+		e.preventDefault();
+		AddicionarInputDelecaoNaLista($(this));
 	});
 
 	$(document).on('click', '.ajax-submit', function(e) {
@@ -143,7 +155,7 @@ $(window).on('load', function() {
 
 // Funções
 function adicionarLoader() {
-	// $('body').css('overflow', 'hidden');
+	$('body').css('overflow', 'hidden');
 	$('.loader').fadeIn('fast');
 	console.log('estou sendo chamado, adicionarLoader()');
 }
@@ -211,6 +223,32 @@ function LoadTo(link, to) {
     	$('.material-tooltip').remove();
     	$('.tooltipped').tooltip({delay: 50});
     	//$('.modal').modal('close');
+    	FormatInputs();
+    }
+});
+}
+
+function AddTo(link, to) {
+	$.ajax({
+		method: "GET",
+		async: true,
+		url: link,
+		beforeSend: function(request) {
+			request.setRequestHeader("Authority-Moon-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Moon-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Moon-nivel", $('input[name="nivel_usuario_sessao"]').val());
+			adicionarLoader();
+		},
+		success: function(data) {
+			$('.'+to).append(data);
+		},
+    error: function(xhr) { // if error occured
+    	removerLoader();
+    },
+    complete: function() {
+    	removerLoader();
+    	$('.material-tooltip').remove();
+    	$('.tooltipped').tooltip({delay: 50});
     	FormatInputs();
     }
 });
@@ -411,6 +449,13 @@ function VerificarForm(form) {
 	}else if(qtdErros <= 0){
 		return true;
 	}
+}
+
+function AddicionarInputDelecaoNaLista(isso) {
+	var id = isso.data('id');
+	console.log(id);
+	isso.closest('form').prepend('<input type="hidden" name="remover[id][]" value="'+id+'">');
+	isso.closest('.pai').remove();
 }
 
 

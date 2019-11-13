@@ -6,7 +6,7 @@ var config = {
 						    "host"     : "localhost",
 						    "user"     : "root",
 						    "password" : "root",
-						    "database" : "moon"
+						    "database" : "hadassah"
 					  	};
 // var config = {
 // 						    "host"     : "us-cdbr-iron-east-05.cleardb.net",

@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Moon</title>
+	<title>Hadassah Consulting System</title>
 	<link rel="icon" type="image/png" sizes="32x32" href="/public/images/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/public/images/favicon-16x16.png">
-	<link rel='stylesheet' href="/public/stylesheets/stars.css"/>
 	<link rel='stylesheet' href="/public/stylesheets/login.css"/>
 	<link rel='stylesheet' href='/public/stylesheets/fontawesome.min.css' />
 	<script src="/public/javascripts/jquery.min.js"></script>
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
-<div id='stars'></div>
-<div id='stars2'></div>
-<div id='stars3'></div>
 
 <body class="row">
 	<main>
@@ -21,7 +17,9 @@
 				<form method="POST" action="/">
 					<div class="icon-box">
 						<img src="/public/images/logo.png">
+						<div class="primary_line w80 margin-t-20"></div>
 					</div>
+
 					<div class="box">
 						<%
 						if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == '404') {
@@ -38,25 +36,29 @@
 							<%
 						}
 						%>
-						<div class="input-field center-align">						
+						<div class="input-field center-align primary-text">
+							<div class="relative label_form">
+								<label class="uppercase">E-mail</label> 
+								<div class="primary_line_v"></div>
+							</div>					
 							<input type="text" name="email" id="login" class="validate" autocomplete="off" placeholder="E-MAIL">
-							<div class="primary_line primary margin-t-10n"></div>
+							
 						</div>
-						<div class="input-field center-align margin-t-20">					
+						<div class="input-field center-align margin-t-20 primary-text">	
+							<div class="relative label_form">
+								<label class="uppercase">Senha</label>
+								<div class="primary_line_v"></div>
+							</div>
 							<input type="password" name="senha" id="senha" class="validate" autocomplete="off" placeholder="SENHA">
-							<div class="primary_line primary margin-t-10n"></div>
 						</div>
-						
-						<div class="right-align margin-t-20">
+
+						<div class="center-align margin-t-20">
 							<button class="primary btn white-text">
 								ENTRAR
 							</button>
 						</div>
 
-						<div class="login-options">
-							<a class="uppercase white-text left margin-t-20" href="#">Não tenho cadastro</a>
-							<a class="uppercase white-text right margin-t-20" href="">Esqueci minha senha</a>
-						</div>
+
 
 					</div>
 				</form>

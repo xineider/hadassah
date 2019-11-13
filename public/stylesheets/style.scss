@@ -1,8 +1,9 @@
-$primary-color:#f4811e;
+$primary-color:#d4a867;
 $secondary-color:#ec1550;
+$grey-color:#999999;
 
 html{
-	background:#000000;
+	background:#ffffff;
 	height: 100%;
 	min-height: 100%;
 }
@@ -12,30 +13,54 @@ body{
 	font-family:'Trebuchet MS';
 }
 
-.btn.primary{
-	color: #ffffff;
+.btn{
+	&.grey{
+		color: #ffffff;
+		background:$grey-color;
 
-	&:hover{
-		background: #90060c;
-		background: -moz-linear-gradient(45deg, #90060c 0%, #c10237 50%, #c15e08 100%);
-		background: -webkit-linear-gradient(45deg, #90060c 0%,#c10237 50%,#c15e08 100%);
-		background: linear-gradient(45deg, #90060c 0%,#c10237 50%,#c15e08 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#90060c', endColorstr='#c15e08',GradientType=0 );
-	}
-}
-
-
-.btn.secondary{
-	color: #ffffff!important;
-
-	&:hover{
-		background:#ffffff;
-		color: $secondary-color!important;
-		.fas{
-			color: $secondary-color!important;
+		&:hover{
+			color: #000000;
+			border:1px solid $grey-color;
+			background:#ffffff;
 		}
 	}
+
+	&.black{
+		border:1px solid $secondary-color;
+		color: $secondary-color;
+		&:hover{
+			color: #ffffff;
+			border:1px solid #ffffff;
+		}
+	}
+
+
+	&.primary{
+		color: #ffffff;
+		background:$primary-color;
+		border:0;
+
+		&:hover{
+			color: #000000;
+			border:1px solid $primary-color;
+			background:#ffffff;
+		}
+	}
+
+	&.secondary{
+		color: #000000!important;
+		border:1px solid $primary-color;
+		background:#ffffff;
+
+		&:hover{
+			background:$primary-color;
+			border:1px solid #000000;
+		}
+	}
+
+	
 }
+
 
 
 .primary{
@@ -106,19 +131,32 @@ body{
 }
 
 .header-logo{
-	width: 90%;
-	margin: auto;
+	width: 100%;
 	box-sizing: content-box;
 	padding: 15px 0;
 	text-align: center;
 	position: relative;
+	background:#000000;
+	height: 50px;
 	img{
-		max-height: 320px;
-		z-index: 2;
-		width: 100%;
-		max-width: 450px;
+		max-height: 35px;
+		z-index: 2;		
+	}
+	.logout{
+		color: #ffffff;
+		margin-right: 30px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin-top: 25px;
+		&:hover{
+			color: $primary-color;
+			text-decoration: none;
+		}
 	}
 }
+
+
 
 @mixin linha_underline_efeito{
 	content:'';
@@ -172,9 +210,7 @@ body{
 
 
 
-.btn.primary{
-	border:0;
-}
+
 
 
 /*DataTable Over*/
@@ -211,52 +247,41 @@ input:focus{
 /*Bootstrap*/
 .form-control{
 	background:transparent;
-	border:1px solid $secondary-color;
-	color: #ffffff;
+	border:1px solid $grey-color;
+	color: #000;
 	border-radius:0.5rem;
 
 	&:focus{
 		background:transparent;
-		color: #ffffff;
+		color: #000000;
 		border-color:$primary-color;
 		box-shadow: none;
 	}
 }
 
-select.form-control{
-	background: #000000;
-}
-
-.form-control option{
-	background:#000000;
-	border-color:$primary-color;
-
-	&:focus{
-		outline: none;
-	}
-}
-
-.tooltip-inner{
-	background:#fff;
-	color: #000000;
-}
 
 
-.tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before, .tooltip.bs-tooltip-top .arrow::before {
-	border-top-color: #ffffff;
-}
+// .tooltip-inner{
+// 	background:#fff;
+// 	color: #000000;
+// }
 
-.tooltip.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .tooltip.bs-tooltip-bottom .arrow::before {
-	border-bottom-color: #ffffff;
-}
 
-.tooltip.bs-tooltip-auto[x-placement^=right] .arrow::before, .tooltip.bs-tooltip-right .arrow::before {
-	border-right-color: #ffffff;
-}
+// .tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before, .tooltip.bs-tooltip-top .arrow::before {
+// 	border-top-color: #ffffff;
+// }
 
-.tooltip.bs-tooltip-auto[x-placement^=left] .arrow::before, .tooltip.bs-tooltip-left .arrow::before {
-	border-left-color: #ffffff;
-}
+// .tooltip.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .tooltip.bs-tooltip-bottom .arrow::before {
+// 	border-bottom-color: #ffffff;
+// }
+
+// .tooltip.bs-tooltip-auto[x-placement^=right] .arrow::before, .tooltip.bs-tooltip-right .arrow::before {
+// 	border-right-color: #ffffff;
+// }
+
+// .tooltip.bs-tooltip-auto[x-placement^=left] .arrow::before, .tooltip.bs-tooltip-left .arrow::before {
+// 	border-left-color: #ffffff;
+// }
 
 .datepicker table tr td.active.active{
 	background:$primary-color;
@@ -276,21 +301,21 @@ select.form-control{
 }
 
 
-// .loader {
-// 	position: fixed;
-// 	background-color: rgba(232, 232, 232, 0.59);
-// 	width: 100%;
-// 	height: 100%;
-// 	z-index: 999;
+.loader {
+	position: fixed;
+	background-color: rgba(232, 232, 232, 0.59);
+	width: 100%;
+	height: 100%;
+	z-index: 999;
 
-// 	i{
-// 		position: absolute;
-// 		top: 50%; 
-// 		left: 50%; 
-// 		margin-top: -35px; 
-// 		margin-left: -35px; 
-// 	}
-// }
+	i{
+		position: absolute;
+		top: 50%; 
+		left: 50%; 
+		margin-top: -35px; 
+		margin-left: -35px; 
+	}
+}
 
 
 .border-primary{
@@ -310,15 +335,5 @@ select.form-control{
 
 	i{
 		vertical-align: sub;
-	}
-}
-
-
-.btn.black{
-	border:1px solid $secondary-color;
-	color: $secondary-color;
-	&:hover{
-		color: #ffffff;
-		border:1px solid #ffffff;
 	}
 }

@@ -1,4 +1,88 @@
-<!--   	<div class="card-panel white">
-  		<h4>Inicio</h4>
-  	</div>
-  	 -->
+		<div class="text-center margin-t-10">
+			<a class="btn primary ajax-load" href="/sistema/empresa/criar">Cadastrar Empresa</a>	
+		</div>
+
+
+		
+
+		<table class="tabela_filtrada text-center black-text margin-center">
+			<thead class="primary-text">
+				<tr>
+					<th>Segmento</th>
+					<th>Região</th>
+					<th>Faturamento</th>
+					<th>Ebitida</th>
+					<th>Valor de Venda</th>
+					<th>Consult</th>
+					<th>COM - </th>
+					<% if(usuario.nivel == 1){ %>
+					<th>Excluir</th>
+					<%}%>
+				</tr>
+			</thead>
+			<tbody>
+
+				<%
+				if (typeof data.empresas != 'undefined' && data.empresas.length > 0) {
+					for (var i = data.empresas.length - 1; i >= 0; i--) { %>
+					<tr class="border-bottom-primary">
+						<td>
+							<a class="ajax-load black-text" href="/sistema/empresa/editar/<%= data.empresas[i].id %>">
+								<%= data.empresas[i].segmento %> 
+							</a>
+						</td>
+						<td>
+							<a class="ajax-load black-text" href="/sistema/empresa/editar/<%= data.empresas[i].id %>">
+								<%= data.empresas[i].regiao %> 
+							</a>
+						</td>
+						<td>
+							<a class="ajax-load black-text" href="/sistema/empresa/editar/<%= data.empresas[i].id %>">
+								<%= data.empresas[i].faturamento %>
+							</a>
+						</td>
+						<td>
+							<a class="ajax-load black-text" href="/sistema/empresa/editar/<%= data.empresas[i].id %>">
+								<%= data.empresas[i].ebitida %>
+							</a>
+						</td>
+
+						<td>
+							<a class="ajax-load black-text" href="/sistema/empresa/editar/<%= data.empresas[i].id %>">
+								<%= data.empresas[i].valor_venda %>
+							</a>
+						</td>
+
+						<td>
+							<a class="ajax-load black-text" href="/sistema/empresa/editar/<%= data.empresas[i].id %>">
+								<%= data.empresas[i].consult %>
+							</a>
+						</td>
+
+						<td>
+							<a class="ajax-load black-text" href="/sistema/empresa/editar/<%= data.empresas[i].id %>">
+								<%= data.empresas[i].com %>
+							</a>
+						</td>
+
+						<td class="text-center">
+							<% if(usuario.nivel == 1){ %>
+
+							<div class="btn modal-remover-mount pointer" data-modal="#modaldeletar" data-id="<%= data.empresas[i].id %>" data-texto="Você tem certeza que quer deletar a empresa da Região <%= data.empresas[i].regiao %>? " data-to="/sistema/empresa/desativar" data-back="/sistema" data-mensagem-sucesso="Empresa Deletada com Sucesso!" data-toggle="tooltip" data-placement="top" title="Deletar Empresa">
+								<i class="fas fa-times red-text"></i>
+							</div>
+
+							<% } %>
+						</td>
+
+					</tr>
+
+					<%}
+				}else{%>
+				<tr>
+					<td colspan="6" class="center">Não há empresas no momento</td>
+				</tr>
+				<%}%>
+			</tbody>
+
+		</table>

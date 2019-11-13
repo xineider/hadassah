@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Moon</title>
+	<title>Hadassah Consulting</title>
 	<link rel="icon" type="image/png" sizes="32x32" href="/public/images/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/public/images/favicon-16x16.png">
 	<link rel='stylesheet' href='/public/stylesheets/fontawesome.min.css' />
@@ -68,12 +68,13 @@
 		<!-- <span class="sr-only">Loading...</span> -->
 	</div>
 
-	<header class="white-text container">
+	<header class="white-text">
 		<div class="header-logo w100">
-			<img src="/public/images/logo.png">
+			<a class="ajax-load" href="/sistema">
+				<img src="/public/images/logo.png">
+			</a>
 			<a class="logout block float-right" href="/logout" onclick="return confirm('Você deseja sair?');">
-				<i class="fas fa-sign-out-alt primary-text"></i>
-				<div class="white-text">Sair</div>
+				<div>Sair</div>
 			</a>
 
 			<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; top: 70px; right: 10px;">
@@ -81,68 +82,6 @@
 					Texto
 				</div>
 			</div>
-		</div>
-
-
-		<div class="header-info text-center margin-t-10">
-			Olá <span class="secondary-text"><%= usuario.nome %></span>.
-			<br>
-			Seu último acesso foi em 00/00 às 00h00.
-
-			<br>
-			<span class="secondary-text uppercase">
-
-				<% if (typeof data.primeiro_aporte != 'undefined' && data.primeiro_aporte.length > 0){ %>
-				Seu aporte inicial foi de <span class="white-text">R$<%= data.primeiro_aporte[0].valor%></span>
-				<%}else{%>
-				<span class="f20">Você não fez nenhum <span class="bold">aporte</span> <a >clique aqui</a> para fazer!</span>
-				<%}%>
-
-
-			</span>
-			<br>
-			<span class="white-text uppercase">
-				<% if (typeof data.saldo_atualizado != 'undefined' && data.saldo_atualizado.length > 0){ %>
-				Saldo Atualizado  R$<%= data.saldo_atualizado[0].saldo_atualizado %>
-				<%}else{%>
-				<span class="f20">Você não fez nenhum <span class="bold">aporte</span> <a >clique aqui</a> para fazer!</span>
-				<%}%>				
-			</span>
-		</div>
-
-		<div class="primary_line w90 margin-center margin-t-5"></div>
-
-		<div class="w90 header-plano uppercase white-text margin-t-10 margin-b-10">
-			<div class="row">
-				<div class="col text-center padding-b-10">
-					<span class="secondary-text f25">Meu Plano</span>
-					<br>
-					<% if (typeof data.plano != 'undefined' && data.plano.length > 0){ %>
-
-					<span class="uppercase f20"><%= data.plano[0].plano %></span>
-					<%}else{%>
-					<span class="uppercase">Nenhum plano atualmente!</span>
-					<%}%>
-				</div>
-				<div class="primary_line_vertical"></div>
-				<div class="col text-center padding-b-10">
-					<div class="w100">
-						<img src="/public/images/rocket.png" class="mw40">
-					</div>
-					<% if (typeof data.meses_decorridos != 'undefined' && data.meses_decorridos.length > 0){ %>
-					<span class="uppercase secondary-text f30"><%= data.meses_decorridos[0].meses_decorridos %> meses</span>
-					<br>
-					Decorridos do seu plano
-					<%}else{%>
-					<span class="uppercase">Nenhum plano atualmente!</span>
-					<%}%>
-
-
-				</div>
-			</div>
-
-
-
 		</div>
 
 		<nav class="w100 header-menu">
