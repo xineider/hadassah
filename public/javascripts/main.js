@@ -125,6 +125,11 @@ $(document).ready(function () {
 		GoTo(location.pathname, false);
 	};
 
+	$(document).on('keyup change', '.pesquisa', function () {
+		Pesquisar($(this),$(this).data('container'));
+	});
+
+
 	$(document).on('click', '.arquivo-escolha', function(e) {
 		e.preventDefault();
 		var nome = $(this).data('nome');
@@ -622,6 +627,39 @@ function filtrarTabelaDataTablePtNoSort(tabela){
 				"sortAscending":  ": Ordenar colunas de forma ascendente",
 				"sortDescending": ": Ordenar colunas de forma descendente"
 			}
+		}
+	});
+}
+
+function Pesquisar(isso,container) {
+	var form = isso.closest('form');
+	var post = form.serializeArray();
+	var link = form.data('link');
+	console.log('llllllink');
+	console.log(link);
+	console.log('llllllink');
+	console.log('container');
+	console.log(container);
+	// console.log(link);
+	$.ajax({
+		method: "POST",
+		async: true,
+		data: post,
+		url: link,
+		beforeSend: function(request) {
+			request.setRequestHeader("Authority-Moon-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Moon-nivel", $('input[name="nivel_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Moon-id", $('input[name="id_usuario_sessao"]').val());
+		},
+		success: function(data) {
+			console.log(data);
+			console.log('container:' + container);
+			$(container).html(data);
+		},
+		error: function(xhr) { // if error occured
+			removerLoader();
+		},
+		complete: function() {
 		}
 	});
 }

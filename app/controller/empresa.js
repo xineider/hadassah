@@ -91,4 +91,13 @@ router.post('/uploadarquivo', function(req, res, next) {
 		});
 });
 
+router.post('/pesquisar', function(req, res, next) {
+
+	POST = req.body;
+	model.ProcurarEmpresa(POST).then(data_empresa => {
+		data.empresas = data_empresa;
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/tabela_interna_only', data: data, usuario: req.session.usuario});
+	});
+});
+
 module.exports = router;

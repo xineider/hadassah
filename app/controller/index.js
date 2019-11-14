@@ -13,11 +13,17 @@ app.use(require('express-is-ajax-request'));
 
 router.get('/', function(req, res, next) {
 	model.GetEmpresas().then(data_empresas=>{
-		data.empresas = data_empresas
-		console.log('kokokokokokoko usuario requisição kokokokokokokokoko')
-		console.log(data);
-		console.log('kokokokokokokokokokokokokokokokokokokokokokokokokoko');
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+		data.empresas = data_empresas;
+		model.GetRegiao().then(data_regiao => {
+			data.regiao = data_regiao;
+			model.GetSegmento().then(data_segmento => {
+				data.segmento = data_segmento;
+				console.log('kokokokokokoko usuario requisição kokokokokokokokoko')
+				console.log(data);
+				console.log('kokokokokokokokokokokokokokokokokokokokokokokokokoko');
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+			});
+		});
 	});
 });
 

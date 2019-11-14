@@ -259,7 +259,10 @@ input:focus{
 	}
 }
 
-
+.card{
+	border:1px solid $primary-color;
+	border-bottom:1px solid $primary-color!important;
+}
 
 // .tooltip-inner{
 // 	background:#fff;

@@ -42,6 +42,100 @@ class EmpresaModel {
 		});
 	}
 
+	ProcurarEmpresa(POST) {
+		return new Promise(function(resolve, reject) {
+
+			if(POST.id_segmento == null || POST.id_segmento == 'nao_existe'){
+				delete POST.id_segmento;
+			}
+
+			if(POST.id_regiao == null || POST.id_regiao == 'nao_existe'){
+				delete POST.id_regiao;
+			}
+
+			if(POST.faturamento_maior == null || POST.faturamento_maior == ''){
+				delete POST.faturamento_maior;
+			}
+
+
+			if(POST.faturamento_menor== null || POST.faturamento_menor == ''){
+				delete POST.faturamento_menor;
+			}
+
+			if(POST.ebitida == null || POST.ebitida == ''){
+				delete POST.ebitida;
+			}
+
+			if(POST.valor_venda_maior == null || POST.valor_venda_maior == ''){
+				delete POST.valor_venda_maior;
+			}
+
+			if(POST.valor_venda_menor == null || POST.valor_venda_menor == ''){
+				delete POST.valor_venda_menor;
+			}
+
+			if(POST.consult == null || POST.consult == ''){
+				delete POST.consult;
+			}
+
+			if(POST.com == null || POST.com == ''){
+				delete POST.com;
+			}
+
+
+			console.log('@@@@@@@@@@ POST DO PROCURAR EMPRESA @@@@@@@@@@');
+			console.log(POST);
+			console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+
+			var where = '';
+			var array = [0,0,0];
+			for (var key in POST) {
+				console.log('key:' +key);
+		
+
+				/*uso a função substring para ver se é um id (o padrão é id_usuario, id_qualquercoisa) 
+				se for um id o mesmo deve ser igual a chave*/
+				if(key.substring(0,3) == 'id_'){
+					where += 'AND a.' + key + ' = ? ';
+					array.push(POST[key]);
+				}else if(key == 'faturamento_maior'){
+					where += 'AND a.faturamento >= ?'
+					array.push(POST[key]);
+				}else if(key == 'faturamento_menor'){
+					where += 'AND a.faturamento <= ?'
+					array.push(POST[key]);
+				}else if(key == 'valor_venda_maior'){
+					where += 'AND a.valor_venda >= ?'
+					array.push(POST[key]);
+				}else if(key == 'valor_venda_menor'){
+					where += 'AND a.valor_venda <= ?'
+					array.push(POST[key]);
+				}else{
+					where += 'AND a.' + key + ' LIKE ? ';
+					array.push('%'+POST[key]+'%');
+					console.log('no else');
+				}
+			}
+
+			console.log('+++++++++ where ++++++');
+			console.log(where);
+			console.log('++++++++++++++++++++++');
+			console.log('********* array *************');
+			console.log(array);
+			console.log('*****************************');
+
+			helper.Query("SELECT a.*,\
+				(SELECT b.descricao FROM segmento as b WHERE b.id = a.id_segmento AND b.deletado = ?) as segmento, \
+				(SELECT c.sigla FROM regiao as c WHERE c.id = a.id_regiao AND c.deletado = ?) as regiao \
+				FROM empresa AS a WHERE a.deletado = ? "+where, array).then(data => {
+				console.log('data do procurar empresa');
+				console.log(data);
+				console.log('eeeeeeeeeeeeeeeeeeeeeeee');			
+				resolve(data);
+			});
+		});
+	}
+
 	CadastrarLog(POST) {
 		var cadastrarLog = [];
 		cadastrarLog.ip = POST[0];
