@@ -2,18 +2,18 @@
 var crypto = require('crypto');
 
 // FAZER LEITURA DAS CONFIGURAÇÕES
-var config = {
-						    "host"     : "localhost",
-						    "user"     : "root",
-						    "password" : "root",
-						    "database" : "hadassah"
-					  	};
 // var config = {
-// 						    "host"     : "mysql669.umbler.com",
-// 						    "user"     : "admin-hadassah",
-// 						    "password" : "GSqb}6(2dB)4",
+// 						    "host"     : "localhost",
+// 						    "user"     : "root",
+// 						    "password" : "root",
 // 						    "database" : "hadassah"
 // 					  	};
+var config = {
+						    "host"     : "mysql669.umbler.com",
+						    "user"     : "admin-hadassah",
+						    "password" : "GSqb}6(2dB)4",
+						    "database" : "hadassah"
+					  	};
 
 // // CONEXÃO MYSQL
 var mysql      = require('mysql');
