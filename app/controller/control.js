@@ -90,12 +90,12 @@ SendMail(para, assunto,text, html) {
 
 					// create reusable transporter object using the default SMTP transport
 					let transporter = nodemailer.createTransport({
-							host: 'smtp.ethereal.email',
+							host: 'smtp.hostinger.com.br',
 							port: 587,
 							secure: false, // true for 465, false for other ports
 							auth: {
-									user: 'odwi55vnlucbzhjg@ethereal.email', // generated ethereal user
-									pass: 'p6aDEXSrHBcDEwP6Ys'  // generated ethereal password
+									user: 'noreply@hadassahconsulting.com', // generated ethereal user
+									pass: '3*Q|U$E+'  // generated ethereal password
 							},
 	    				tls: {
 	    					rejectUnauthorized: false
@@ -104,7 +104,7 @@ SendMail(para, assunto,text, html) {
 
 					// setup email data with unicode symbols
 					let mailOptions = {
-							from: 'odwi55vnlucbzhjg@ethereal.email', // sender address
+							from: 'noreply@hadassahconsulting.com', // sender address
 							to: para, // list of receivers
 							subject: assunto, // Subject line
 							text: text, 
@@ -129,12 +129,12 @@ SendMailAttachment(para, assunto,text, html,nomeAnexo,caminhoAnexo) {
 
 					// create reusable transporter object using the default SMTP transport
 					let transporter = nodemailer.createTransport({
-							host: 'smtp.ethereal.email',
+							host: 'smtp.hostinger.com.br',
 							port: 587,
 							secure: false, // true for 465, false for other ports
 							auth: {
-									user: 'odwi55vnlucbzhjg@ethereal.email', // generated ethereal user
-									pass: 'p6aDEXSrHBcDEwP6Ys'  // generated ethereal password
+									user: 'noreply@hadassahconsulting.com', // generated ethereal user
+									pass: '3*Q|U$E+'  // generated ethereal password
 							},
 	    				tls: {
 	    					rejectUnauthorized: false
@@ -143,7 +143,7 @@ SendMailAttachment(para, assunto,text, html,nomeAnexo,caminhoAnexo) {
 
 					// setup email data with unicode symbols
 					let mailOptions = {
-							from: 'odwi55vnlucbzhjg@ethereal.email', // sender address
+							from: 'noreply@hadassahconsulting.com', // sender address
 							to: para, // list of receivers
 							subject: assunto, // Subject line
 							text: text, 

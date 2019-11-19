@@ -145,7 +145,7 @@ router.post('/usuarios/cadastrar/', function(req, res, next) {
 				"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
 				"<br>Por favor, não responda essa mensagem, pois ela é enviada automaticamente!";
 
-				control.SendMail(POST.email, 'Bem-vindo ao Moon!', html,text);
+				control.SendMail(POST.email, 'Bem-vindo ao Hadassah Consulting!', text,html);
 
 				res.json(data);
 			});
@@ -230,7 +230,7 @@ router.post('/usuarios/alterar-senha/', function(req, res, next) {
 			"<br>Senha: "+senha+
 			"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
 			"<br>Por favor, não responda essa mensagem, pois ela é enviada automaticamente!";
-			control.SendMail(data_usuario[0].email, 'Alterado Senha no Hadassah Consulting!', html, text);
+			control.SendMail(data_usuario[0].email, 'Alterado Senha no Hadassah Consulting!', text,html);
 			res.json(data);
 		});
 	});
@@ -267,7 +267,7 @@ router.post('/usuarios/atualizar/', function(req, res, next) {
 			model.VerificarSeTemEmailDisponivel(POST.email).then(tem_email => {
 				if(tem_email == ''){
 					model.AtualizarUsuario(POST).then(data => {
-						control.SendMail(POST.email, 'E-mail alterado no Hadassah!', html, text);
+						control.SendMail(POST.email, 'E-mail alterado no Hadassah!', text,html);
 						res.json(data);
 					});
 				}else{
