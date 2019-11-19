@@ -96,17 +96,23 @@
 				<%- include('observacoes_lista_todos_editar'); %>
 			</div>
 
+			<% if(usuario.nivel != 4){ %>
 			<div class="row margin-b-10">
 				<div class="col-md-12 text-center">
 					<button class="btn secondary ajax-add-to" data-href="/sistema/empresa/adicionar/observacao" data-to="observacoes_lista">Adicionar outra Observação</button>
 				</div>
 			</div>
+			<% } %>
+
 
 			<a class="btn ajax-load grey" href="/sistema">Voltar</a>
 
+			<% if(usuario.nivel != 4){ %>
 			<button data-href="/sistema/empresa/atualizar" data-action="/sistema" class="btn primary ajax-submit" data-mensagem-sucesso="Empresa Atualizada com Sucesso!">
 				Atualizar Empresa <i class="far fa-save-o" aria-hidden="true"></i>
 			</button>
+
+			<% } %>
 
 		</form>
 	</div>

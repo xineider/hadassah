@@ -1,0 +1,94 @@
+<div class="w100 text-center">
+	<div class="bold f25 text-center ">
+		Administração de Usuários
+	</div>
+	
+	
+	<%if(usuario.nivel == 1){ %>
+
+
+	<div class="text-center margin-b-10 margin-t-10">
+		<a class="btn primary ajax-load mx-auto" href="<%= data.link_sistema%>/administracao/usuarios/criar">Cadastrar Usuário</a>
+	</div>
+
+
+	<div class="col s12">
+
+		<table class="tabela_filtrada text-center  margin-center">
+			<thead class="primary-text">
+				<tr>
+					<th>Nome</th>
+					<th>Email</th>
+					<th>Nível</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<%
+				if (typeof data.usuarios_admin != 'undefined' && data.usuarios_admin.length > 0) {
+					for (var i = data.usuarios_admin.length - 1; i >= 0; i--) { %>
+					<tr class="border-bottom-primary">
+						<td>
+							<a class="ajax-load black-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.usuarios_admin[i].id %>">
+								<%= data.usuarios_admin[i].nome %> 
+							</a>
+						</td>
+						<td>
+							<a class="ajax-load black-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.usuarios_admin[i].id %>">
+								<%= data.usuarios_admin[i].email %>
+							</a>
+						</td>
+						<td>
+							<a class="ajax-load black-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.usuarios_admin[i].id %>">
+								<% switch(data.usuarios_admin[i].nivel){
+									case 1:%>
+									Administrador
+									<% break;
+									case 2:%>
+									Super Usuário
+									<%break;
+									case 3:%>
+									Usuário
+									<%break;
+									case 4:%>
+									Observador
+									<%break;}%>
+								</a>
+							</td>
+							<td style="width: 30%;" class="center">
+								<% if(usuario.nivel == 1){ %>
+
+								<div class="btn primary modal-mount pointer" data-modal="#modalinfo" data-link="/sistema/administracao/alterar-senha-usuario/<%= data.usuarios_admin[i].id %>"data-toggle="tooltip" data-placement="top" title="Alterar Senha do Usuário">
+									<i class="fas fa-key "></i>
+								</div>
+								
+								<div class="btn primary modal-remover-mount pointer" data-modal="#modaldeletar" data-id="<%= data.usuarios_admin[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.usuarios_admin[i].nome %>'? " data-to="/sistema/administracao/usuarios/desativar" data-back="<%= data.link_sistema%>/administracao/usuarios"data-mensagem-sucesso="Usuário Deletado com Sucesso!" data-toggle="tooltip" data-placement="top" title="Deletar Usuário">
+									<i class="fas fa-times "></i>
+								</div>
+
+								<% } %>
+							</td>
+
+						</tr>
+
+						<%}
+					}else{%>
+					<tr>
+						<td colspan="5" class="center">Não há usuários no momento</td>
+					</tr>
+					<%}%>
+				</tbody>
+
+			</table>
+		</div>
+
+
+
+
+
+		<%}else{%>
+		<div class=" text-center f25">Você não possui permissão para acessar esse conteúdo!</div>
+		<%}%>
+
+	</div>

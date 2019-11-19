@@ -1,0 +1,240 @@
+<div class="col s12 center padding-0">
+	<div class="bold f25 margin-l-20 border-bottom-gold margin-b-10">
+		Administração de Usuários
+		<i class="fas fa-users right margin-r-20 gold-text"></i>
+	</div>
+	
+	
+	<%if(usuario.nivel == 2 || usuario.nivel == 4 || usuario.nivel == 5){ %>
+
+
+	<div class="row center-align">
+		<a class="btn gold ajax-load" href="<%= data.link_sistema%>/administracao/usuarios/criar">Cadastrar Usuário</a>
+	</div>
+
+
+	<div class="col s12">
+
+		<table class="table-full-width tabela_filtrada">
+			<thead class="gold-text">
+				<tr>
+					<th>Login</th>
+					<th>Nome</th>
+					<th>Coach</th>
+					<th>Email</th>
+					<th>Nível</th>
+					<th>Excluir</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<%
+				if (typeof data.coach != 'undefined' && data.coach.length > 0) {
+					for (var i = data.coach.length - 1; i >= 0; i--) { %>
+					<tr class="border-bottom-gold">
+						<td>
+							<a class="limitador_3_linhas ajax-load white-text break-all" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coach[i].id %>">
+								<%= data.coach[i].login %>
+							</a> 
+						</td>
+						<td>
+							<a class="limitador_3_linhas break-all ajax-load white-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coach[i].id %>">
+								<%= data.coach[i].nome %> 
+							</a>
+						</td>
+						<td>
+							<a class="limitador_3_linhas break-all ajax-load white-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coach[i].id %>">
+									<%= data.coach[i].coach %> 
+								</a>
+						</td>
+						<td>
+							<a class="limitador_3_linhas ajax-load white-text break-all" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coach[i].id %>">
+								<%= data.coach[i].email %>
+							</a>
+						</td>
+						<td>
+							<a class="limitador_3_linhas ajax-load white-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coach[i].id %>">
+								<% switch(data.coach[i].nivel){
+									case 0:%>
+									Coachee
+									<% break;
+									case 1:%>
+									Coach
+									<%break;
+									case 2:%>
+									Manager
+									<%break;
+									case 3:%>
+									Investidor
+									<%break;
+									case 4:%>
+									Manager
+									<%break;
+									case 5:%>
+									Administrador
+									<%break;}%>
+								</a>
+							</td>
+							<td style="width: 30%;" class="center">
+								<% if((usuario.nivel == 4 && data.coach[i].nivel != 5) || (usuario.nivel == 2 || usuario.nivel == 5 )){ %>
+								<div class="btn gold modal-remover-mount" data-id="<%= data.coach[i].id %>" data-href="#modaldeletar" data-texto="Você tem certeza que quer deletar '<%= data.coach[i].nome %>'? " data-to="/sistema/administracao/usuarios/desativar" data-back="<%= data.link_sistema%>/administracao/usuarios">
+									<i class="fas fa-times black-text"></i>
+								</div>
+
+								<div class="teste" data-href="aaaaaaaaaaaaa"></div>
+								<% } %>
+							</td>
+
+						</tr>
+
+						<%} 
+					}%>
+
+
+					<%
+					if (typeof data.coachees_manager != 'undefined' && data.coachees_manager.length > 0) {
+						for (var i = data.coachees_manager.length - 1; i >= 0; i--) { %>
+						<tr class="border-bottom-gold">
+							<td>
+								<a class="limitador_3_linhas ajax-load white-text break-all" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coachees_manager[i].id %>">
+									<%= data.coachees_manager[i].login %>
+								</a> 
+							</td>
+							<td>
+								<a class="limitador_3_linhas break-all ajax-load white-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coachees_manager[i].id %>">
+									<%= data.coachees_manager[i].nome %> 
+								</a>
+							</td>
+							<td>								
+								<a class="limitador_3_linhas break-all ajax-load white-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coachees_manager[i].id %>">
+									<%= data.coachees_manager[i].coach %> 
+								</a>
+							</td>
+							<td>
+								<a class="limitador_3_linhas ajax-load white-text break-all" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coachees_manager[i].id %>">
+									<%= data.coachees_manager[i].email %>
+								</a>
+							</td>
+							<td>
+								<a class="limitador_3_linhas ajax-load white-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coachees_manager[i].id %>">
+									<% switch(data.coachees_manager[i].nivel){
+										case 0:%>
+										Coachee
+										<% break;
+										case 1:%>
+										Coach
+										<%break;
+										case 2:%>
+										Manager
+										<%break;
+										case 3:%>
+										Investidor
+										<%break;
+										case 4:%>
+										Manager
+										<%break;
+										case 5:%>
+										Administrador
+										<%break;}%>
+									</a>
+								</td>
+								<td style="width: 30%;" class="center">
+									<% if((usuario.nivel == 4 && data.coachees_manager[i].nivel != 5) || (usuario.nivel == 2 || usuario.nivel == 5 )){ %>
+									<div class="btn gold modal-remover-mount" data-id="<%= data.coachees_manager[i].id %>" data-href="#modaldeletar" data-texto="Você tem certeza que quer deletar '<%= data.coachees_manager[i].nome %>'? " data-to="/sistema/administracao/usuarios/desativar" data-back="<%= data.link_sistema%>/administracao/usuarios">
+										<i class="fas fa-times black-text"></i>
+									</div>
+
+									<div class="teste" data-href="aaaaaaaaaaaaa"></div>
+									<% } %>
+								</td>
+
+							</tr>
+
+							<%} 
+						}%>
+
+						<%
+						if (typeof data.coachees != 'undefined' && data.coachees.length > 0) {
+							for (var i = data.coachees.length - 1; i >= 0; i--) { %>
+							<tr class="border-bottom-gold">
+								<td>
+									<a class="limitador_3_linhas ajax-load white-text break-all" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coachees[i].id %>">
+										<%= data.coachees[i].login %>
+									</a> 
+								</td>
+								<td>
+									<a class="limitador_3_linhas break-all ajax-load white-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coachees[i].id %>">
+										<%= data.coachees[i].nome %> 
+									</a>
+								</td>
+								<td>
+									<a class="limitador_3_linhas break-all ajax-load white-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coachees[i].id %>">
+										<%= data.coachees[i].coach %> 
+									</a>
+								</td>
+								<td>
+									<a class="limitador_3_linhas ajax-load white-text break-all" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coachees[i].id %>">
+										<%= data.coachees[i].email %>
+									</a>
+								</td>
+								<td>
+									<a class="limitador_3_linhas ajax-load white-text" href="<%= data.link_sistema%>/administracao/usuarios/editar/<%= data.coachees[i].id %>">
+										<% switch(data.coachees[i].nivel){
+											case 0:%>
+											Coachee
+											<% break;
+											case 1:%>
+											Coach
+											<%break;
+											case 2:%>
+											Manager
+											<%break;
+											case 3:%>
+											Investidor
+											<%break;
+											case 4:%>
+											Manager
+											<%break;
+											case 5:%>
+											Administrador
+											<%break;}%>
+										</a>
+									</td>
+									<td style="width: 30%;" class="center">
+										<% if((usuario.nivel == 4 && data.coachees[i].nivel != 5) || (usuario.nivel == 5 || usuario.nivel == 2)){ %>
+										<div class="btn gold modal-remover-mount" data-id="<%= data.coachees[i].id %>" data-href="#modaldeletar" data-texto="Você tem certeza que quer deletar '<%= data.coachees[i].nome %>'? " data-to="/sistema/administracao/usuarios/desativar" data-back="<%= data.link_sistema%>/administracao/usuarios">
+											<i class="fas fa-times black-text"></i>
+										</div>
+										<i class="fas fa-times black-text"></i>
+									</div>
+									<% } %>
+								</td>
+
+							</tr>
+
+							<%} 
+						}%>
+
+						<% if(data.coachees.length == 0 && data.coach.length == 0 && data.coachees_manager.length == 0 ){%>
+						<tr>
+							<td colspan="6" class="center">Você não possui coachs ou coachees no momento!</td>
+						</tr>
+						<%}%>
+
+
+
+
+					</tbody>
+
+				</table>
+			</div>
+
+
+
+
+
+			<%}else{%>
+			<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+			<%}%>
+
+		</div>

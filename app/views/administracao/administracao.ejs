@@ -1,0 +1,15 @@
+<%if(usuario.nivel == 1 || usuario.nivel == 2){ %>
+
+<ul class="nav flex-column text-center">
+	<li class="nav-item">
+		<a class="nav-link ajax-load uppercase black-text bold" href="/sistema/administracao/usuarios">Usuários</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link ajax-load uppercase black-text bold" href="/sistema/administracao/permissoes_niveis">Permissões dos Níveis</a>
+	</li>
+</ul>
+
+
+<%}else{%>
+<div class="white-text">Você não possui permissão para acessar esse conteúdo</div>
+<%}%>

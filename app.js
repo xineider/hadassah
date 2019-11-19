@@ -14,6 +14,7 @@ var index = require('./app/controller/index');
 var api = require('./app/controller/api');
 var configuracoes = require('./app/controller/configuracoes');
 var usuarios = require('./app/controller/usuarios');
+var administracao = require('./app/controller/administracao');
 var empresa = require('./app/controller/empresa');
 
 var VerificacaoModel = require('./app/model/verificacaoModel');
@@ -35,12 +36,12 @@ app.use(session({
 
 
 
-// app.use(function(req,res,next){
-//   req.session.usuario = {};
-//   req.session.usuario.id = 1;
-//   req.session.usuario.nivel = 1;
-//   next();
-// });
+app.use(function(req,res,next){
+  req.session.usuario = {};
+  req.session.usuario.id = 1;
+  req.session.usuario.nivel = 1;
+  next();
+});
 
 
 // Verifica usuario se esta logado ou não
@@ -109,6 +110,7 @@ app.use("/public", express.static(__dirname + '/public'));
 app.use('/', login);
 app.use('/sistema', index);
 app.use('/sistema/empresa', empresa);
+app.use('/sistema/administracao', administracao);
 app.use('/sistema/api', api);
 
 

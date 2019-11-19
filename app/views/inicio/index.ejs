@@ -1,8 +1,11 @@
-		<div class="text-center margin-t-10">
-			<a class="btn primary ajax-load" href="/sistema/empresa/criar">Cadastrar Empresa</a>	
-		</div>
+		 <% if(usuario.nivel != 4){ %>
+		 <div class="text-center margin-t-10">
+		 	<a class="btn primary ajax-load" href="/sistema/empresa/criar">Cadastrar Empresa</a>	
+		 </div>
+
+		 <% } %>
 
 
-		<%- include('empresa_pesquisa'); %>
+		 <%- include('empresa_pesquisa'); %>
 
-		<%- include('tabela_interna_only'); %>
+		 <%- include('tabela_interna_only'); %>
