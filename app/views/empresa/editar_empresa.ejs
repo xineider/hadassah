@@ -6,7 +6,9 @@
 
 			<input type="hidden" name="empresa[id]" value="<%= data.empresa[0].id %>">
 			<input type="hidden" name="empresa[id_usuario]" value="<%=usuario.id%>">
+
 			<div class="row">
+				<% if((data.permissoes.length == 0) || (data.permissoes.length > 0 && data.permissoes[0].show_segmento == 0)){ %>
 				<div class="form-group col-md-6">
 					<div class="row">
 						<label class="grey-text col-sm-2" for="empresa[id_segmento]">Segmento</label>
@@ -22,6 +24,7 @@
 						</div>
 					</div>
 				</div>
+				<%}if((data.permissoes.length == 0) || (data.permissoes.length > 0 && data.permissoes[0].show_regiao == 0)){ %>
 				<div class="form-group col-md-6">
 					<div class="row">
 						<label class="grey-text col-sm-2" for="id_regiao">Região</label>
@@ -37,9 +40,11 @@
 						</div>
 					</div>
 				</div>
+				<%}%>
 			</div>
 
 			<div class="row">
+				<% if((data.permissoes.length == 0) || (data.permissoes.length > 0 && data.permissoes[0].show_faturamento == 0)){ %>
 				<div class="form-group col-md-6">
 					<div class="row">
 						<label class="grey-text col-sm-2" for="empresa[faturamento]">Faturamento</label>
@@ -48,6 +53,7 @@
 						</div>
 					</div>
 				</div>
+				<% }if((data.permissoes.length == 0) || (data.permissoes.length > 0 && data.permissoes[0].show_ebitida == 0)){ %>
 				<div class="form-group col-md-6">
 					<div class="row">
 						<label class="grey-text col-sm-2" for="empresa[valor]">Ebitida</label>
@@ -56,9 +62,11 @@
 						</div>
 					</div>
 				</div>
+				<%}%>
 			</div>
 
 			<div class="row">
+				<% if((data.permissoes.length == 0) || (data.permissoes.length > 0 && data.permissoes[0].show_valor_venda == 0)){ %>
 
 				<div class="form-group col-md-6">
 					<div class="row">
@@ -69,6 +77,8 @@
 					</div>
 				</div>
 
+				<% }if((data.permissoes.length == 0) || (data.permissoes.length > 0 && data.permissoes[0].show_consult == 0)){ %>
+
 				<div class="form-group col-md-6">
 					<div class="row">
 						<label class="grey-text col-sm-2" for="empresa[consult]">Consult</label>
@@ -77,9 +87,13 @@
 						</div>
 					</div>
 				</div>
+
+				<%}%>
 			</div>
 
 			<div class="row">
+
+				<% if((data.permissoes.length == 0) || (data.permissoes.length > 0 && data.permissoes[0].show_com == 0)){ %>
 
 				<div class="form-group col-md-12">
 					<div class="row">
@@ -90,10 +104,15 @@
 					</div>
 				</div>
 
+				<%}%>
+
 			</div>
 
 			<div class="row observacoes_lista">
+				<% if((data.permissoes.length == 0) || (data.permissoes.length > 0 && data.permissoes[0].show_observacoes == 0)){ %>
 				<%- include('observacoes_lista_todos_editar'); %>
+
+				<%}%>
 			</div>
 
 			<% if(usuario.nivel != 4){ %>

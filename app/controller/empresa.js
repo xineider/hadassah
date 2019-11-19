@@ -30,13 +30,15 @@ router.get('/criar', function(req, res, next) {
 
 router.get('/editar/:id', function(req, res, next) {
 	var id = req.params.id;
-	model.SelecionarEmpresaComObservacoesRegiaoSegmento(id).then(data => {
+
+	model.SelecionarEmpresaComObservacoesRegiaoSegmentoPermissao(id,req.session.usuario.nivel).then(data => {
 		console.log('eeeeeeeeeeee editar empresa eeeeeeeee');
 		console.log(data);
 		console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'empresa/editar_empresa', data: data, usuario: req.session.usuario});
 	});
 });
+
 
 
 
@@ -96,7 +98,10 @@ router.post('/pesquisar', function(req, res, next) {
 	POST = req.body;
 	model.ProcurarEmpresa(POST).then(data_empresa => {
 		data.empresas = data_empresa;
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/tabela_interna_only', data: data, usuario: req.session.usuario});
+		model.GetPermissoesPorNivel(req.session.usuario.nivel).then(data_permissoes=>{
+			data.permissoes = data_permissoes;
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/tabela_interna_only', data: data, usuario: req.session.usuario});
+		});
 	});
 });
 

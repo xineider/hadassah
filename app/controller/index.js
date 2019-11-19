@@ -18,12 +18,15 @@ router.get('/', function(req, res, next) {
 			data.regiao = data_regiao;
 			model.GetSegmento().then(data_segmento => {
 				data.segmento = data_segmento;
-				console.log('usuario');
-				console.log(req.session.usuario);
-				console.log('kokokokokokoko usuario requisição kokokokokokokokoko')
-				console.log(data);
-				console.log('kokokokokokokokokokokokokokokokokokokokokokokokokoko');
-				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+				model.GetPermissoesPorNivel(req.session.usuario.nivel).then(data_permissoes=>{
+					data.permissoes = data_permissoes;
+					console.log('usuario');
+					console.log(req.session.usuario);
+					console.log('kokokokokokoko usuario requisição kokokokokokokokoko')
+					console.log(data);
+					console.log('kokokokokokokokokokokokokokokokokokokokokokokokokoko');
+					res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+				});
 			});
 		});
 	});

@@ -1,0 +1,113 @@
+<%if(usuario.nivel == 1){ %>
+<div class="container-fluid">
+	<div class="w100 text-center">
+		<div class="bold f25 text-center margin-b-10">Cadastrar Permissão</div>
+
+		<form method="POST" action="" enctype="multipart/form-data">
+
+			<div class="row">
+				<div class="form-group col-md-12">
+					<div class="row">
+						<label class="col-sm-1" for="nivel">Nível</label>
+						<div class="col-sm-11">
+							<select required="true" name="nivel" class="form-control">
+								<option value="4" selected>Observador</option>
+								<option value="3">Comum</option>		
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="w100 f25">Mostrar Dados:</div>
+			</div>
+
+			<div class="row">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="0" name="show_segmento" checked>
+					<label class="form-check-label" for="show_segmento">
+						Mostrar Segmento
+					</label>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="0" name="show_regiao" checked>
+					<label class="form-check-label" for="show_regiao">
+						Mostrar Região
+					</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="0" name="show_faturamento" checked>
+					<label class="form-check-label" for="show_faturamento">
+						Mostrar Faturamento
+					</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="0" name="show_ebitida" checked>
+					<label class="form-check-label" for="show_ebitida">
+						Mostrar Ebitida
+					</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="0" name="show_valor_venda" checked>
+					<label class="form-check-label" for="show_valor_venda">
+						Mostrar Valor Venda
+					</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="0" name="show_consult" checked>
+					<label class="form-check-label" for="show_consult">
+						Mostrar Consult
+					</label>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="0" name="show_com" checked>
+					<label class="form-check-label" for="show_com">
+						Mostrar COM - 
+					</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="0" name="show_observacoes" checked>
+					<label class="form-check-label" for="show_observacoes">
+						Mostrar Observações 
+					</label>
+				</div>
+			</div>
+
+
+			<button data-href="/sistema/administracao/permissao/cadastrar" data-action="<%= data.link_sistema%>/administracao/permissoes_niveis/" class="btn primary ajax-submit margin-b-10" data-mensagem-sucesso="Permissão Cadastrada com Sucesso!" >
+				Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+			</button>
+
+		</form>
+	</div>
+
+</div>
+
+<%}else{%>
+<div class="text-center f25">Você não possui permissão para acessar esse conteúdo!</div>
+<%}%>
+

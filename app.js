@@ -36,12 +36,12 @@ app.use(session({
 
 
 
-app.use(function(req,res,next){
-  req.session.usuario = {};
-  req.session.usuario.id = 1;
-  req.session.usuario.nivel = 1;
-  next();
-});
+// app.use(function(req,res,next){
+//   req.session.usuario = {};
+//   req.session.usuario.id = 1;
+//   req.session.usuario.nivel = 1;
+//   next();
+// });
 
 
 // Verifica usuario se esta logado ou não

@@ -34,6 +34,15 @@ class IndexModel {
 			});
 	}
 
+	GetPermissoesPorNivel(nivel) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.*\
+				FROM permissoes as a WHERE deletado = ? AND nivel = ? ORDER BY data_cadastro DESC LIMIT 1', [0,nivel]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
 	CadastrarLog(POST) {
 		var cadastrarLog = [];
 		cadastrarLog.ip = POST[0];

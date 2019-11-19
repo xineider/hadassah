@@ -6,7 +6,7 @@ var helper = new Helper;
 
 class EmpresaModel {
 
-	SelecionarEmpresaComObservacoesRegiaoSegmento(id) {
+	SelecionarEmpresaComObservacoesRegiaoSegmentoPermissao(id,nivel) {
 		return new Promise(function(resolve, reject) {
 			var data = {};
 			helper.Query("SELECT a.* FROM empresa as a WHERE a.id = ? AND a.deletado = ?", [id, 0]).then(data_empresa => {
@@ -17,7 +17,10 @@ class EmpresaModel {
 						data.regiao = data_regiao;
 						helper.Query("SELECT a.* FROM segmento as a WHERE a.deletado = ?", [0]).then(data_segmento => {
 							data.segmento = data_segmento;
-							resolve(data);
+							helper.Query('SELECT a.* FROM permissoes as a WHERE deletado = ? AND nivel = ? ORDER BY data_cadastro DESC LIMIT 1', [0,nivel]).then(data_permissoes => {
+								data.permissoes = data_permissoes;
+								resolve(data);
+							});
 						});
 					});
 				});
@@ -91,7 +94,7 @@ class EmpresaModel {
 			var array = [0,0,0];
 			for (var key in POST) {
 				console.log('key:' +key);
-		
+
 
 				/*uso a função substring para ver se é um id (o padrão é id_usuario, id_qualquercoisa) 
 				se for um id o mesmo deve ser igual a chave*/
@@ -128,12 +131,12 @@ class EmpresaModel {
 				(SELECT b.descricao FROM segmento as b WHERE b.id = a.id_segmento AND b.deletado = ?) as segmento, \
 				(SELECT c.sigla FROM regiao as c WHERE c.id = a.id_regiao AND c.deletado = ?) as regiao \
 				FROM empresa AS a WHERE a.deletado = ? "+where, array).then(data => {
-				console.log('data do procurar empresa');
-				console.log(data);
-				console.log('eeeeeeeeeeeeeeeeeeeeeeee');			
-				resolve(data);
+					console.log('data do procurar empresa');
+					console.log(data);
+					console.log('eeeeeeeeeeeeeeeeeeeeeeee');			
+					resolve(data);
+				});
 			});
-		});
 	}
 
 	CadastrarLog(POST) {
@@ -295,6 +298,14 @@ class EmpresaModel {
 		});
 	}
 
+	GetPermissoesPorNivel(nivel) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.*\
+				FROM permissoes as a WHERE deletado = ? AND nivel = ? ORDER BY data_cadastro DESC LIMIT 1', [0,nivel]).then(data => {
+					resolve(data);
+				});
+			});
+	}
 
 
 	DesativarEmpresa(POST) {
