@@ -58,16 +58,17 @@
               </a>
             </td>
 
+            <% if(usuario.nivel == 1){ %>
             <td class="text-center">
-              <% if(usuario.nivel == 1){ %>
+              
 
               <div class="btn modal-remover-mount pointer" data-modal="#modaldeletar" data-id="<%= data.empresas[i].id %>" data-texto="Você tem certeza que quer deletar a empresa da Região <%= data.empresas[i].regiao %>? " data-to="/sistema/empresa/desativar" data-back="/sistema" data-mensagem-sucesso="Empresa Deletada com Sucesso!" data-toggle="tooltip" data-placement="top" title="Deletar Empresa">
                 <i class="fas fa-times red-text"></i>
               </div>
 
-              <% } %>
+            
             </td>
-
+              <% } %>
           </tr>
 
           <%}
