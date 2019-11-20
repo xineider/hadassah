@@ -124,6 +124,10 @@ router.post('/usuarios/cadastrar/', function(req, res, next) {
 	console.log(POST);
 	console.log('PPPPPPPPPPPPPPPPOOOOOOOOOOOSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTT');
 
+	console.log('eeeeeeeeeeee mail eeeeeeeeeeeeeee');
+	console.log(POST.email);
+	console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+
 	model.VerificarSeTemEmailDisponivel(POST.email).then(tem_email => {
 		console.log('ttttttttttt tem login ttttt');
 		console.log(tem_email);
@@ -131,21 +135,34 @@ router.post('/usuarios/cadastrar/', function(req, res, next) {
 
 		if(tem_email == ''){
 			model.CadastrarUsuario(POST).then(data => {
+				console.log('cai aqui no cadastrar usuario');
 
-				var html = "Bem vindo ao Hadassah Consulting!. Segue abaixo as informações sobre sua conta."+
-				"<br><b>Login:</b> "+POST.email+
-				"<br><b>Senha:</b> "+senha+ 
+
+				var html = "Bem vindo ao Hadassah Consulting! Segue abaixo as informações sobre sua conta."+
+				"<br>Para fazer o Login, utilize este e-mail e esta senha:"+
+				"<br>"+senha+
 				"<br>Acesse via o site : http://hadassahconsulting-com.umbler.net/"+
 				"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
 				"<br><b>Por favor, não responda essa mensagem, pois ela é enviada automaticamente!</b>";
 
-				var text = "Bem vindo ao Hadassah Consulting!. Segue abaixo as informações sobre sua conta."+
-				"<br>Login: "+POST.email+
-				"<br>Senha: "+senha+
+				var text = "Bem vindo ao Hadassah Consulting! Segue abaixo as informações sobre sua conta."+
+				"<br>Para fazer o Login, utilize este e-mail e esta senha:"+
+				"<br>"+senha+
+				"<br>Acesse via o site : http://hadassahconsulting-com.umbler.net/"+
 				"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
 				"<br>Por favor, não responda essa mensagem, pois ela é enviada automaticamente!";
 
+
+				console.log('lllllllllllllllllll html lllllllllllllllllllllll');
+				console.log(html);
+				console.log('llllllllllllllllllllllllllllllllllllllllllllllll')
+
+				console.log('@@@@@@@@@@@@@@@@ text !@@@@@@@@@@@');
+				console.log(text);
+				console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+
 				control.SendMail(POST.email, 'Bem-vindo ao Hadassah Consulting!', text,html);
+				
 
 				res.json(data);
 			});
@@ -211,6 +228,9 @@ router.post('/permissao/cadastrar/', function(req, res, next) {
 router.post('/usuarios/alterar-senha/', function(req, res, next) {
 	POST = req.body;
 	var senha = Math.random().toString(36).substr(2, 8);
+	console.log('ssssssssssssssssssss senha sssssssssssssssssssssss');
+	console.log(senha);
+	console.log('ssssssssssssssssssssssssssssssssssssssssssssssssss');
 	POST.senha = senha;
 
 	console.log('USUARIOS ALTERAR-SENHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
@@ -220,13 +240,13 @@ router.post('/usuarios/alterar-senha/', function(req, res, next) {
 	model.SelecionarUsuario(POST.id).then(data_usuario => {
 		model.AlterarSenhaUsuario(POST).then(senha_alteradao =>{
 			var html = "Olá sua senha foi alterada pelo administrador do Sistema Hadassah Consulting. Segue abaixo as informações sobre sua conta."+
-			"<br>O E-mail segue sendo este e a nova senha é:"
+			"<br>O E-mail segue sendo este e a nova senha é:"+
 			"<br>"+senha+ 
 			"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
 			"<br><b>Por favor, não responda essa mensagem, pois ela é enviada automaticamente!</b>";
 
 			var text = "Olá sua senha foi alterada pelo administrador do Sistema Hadassah Consulting. Segue abaixo as informações sobre sua conta."+
-			"<br>Login: "+data_usuario[0].login+
+			"<br>O E-mail segue sendo este e a nova senha é:"+
 			"<br>Senha: "+senha+
 			"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
 			"<br>Por favor, não responda essa mensagem, pois ela é enviada automaticamente!";
