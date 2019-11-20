@@ -137,20 +137,31 @@ router.post('/usuarios/cadastrar/', function(req, res, next) {
 			model.CadastrarUsuario(POST).then(data => {
 				console.log('cai aqui no cadastrar usuario');
 
-
-				var html = "Bem vindo ao Hadassah Consulting! Segue abaixo as informações sobre sua conta."+
-				"<br>Para fazer o Login, utilize este e-mail e esta senha:"+
-				"<br>"+senha+
-				"<br>Acesse via o site : http://hadassahconsulting-com.umbler.net/"+
+				var html = "Olá, você foi cadastrado no Hadassah Consulting! Segue abaixo as informações sobre sua conta."+
+				"<br>O E-mail é este e a senha é:<br>"+senha+
 				"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
 				"<br><b>Por favor, não responda essa mensagem, pois ela é enviada automaticamente!</b>";
 
-				var text = "Bem vindo ao Hadassah Consulting! Segue abaixo as informações sobre sua conta."+
-				"<br>Para fazer o Login, utilize este e-mail e esta senha:"+
-				"<br>"+senha+
-				"<br>Acesse via o site : http://hadassahconsulting-com.umbler.net/"+
+				var text = "Olá, você foi cadastrado no Hadassah Consulting! Segue abaixo as informações sobre sua conta."+
+				"<br>O E-mail é este e a senha é:<br>"+senha+
 				"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
 				"<br>Por favor, não responda essa mensagem, pois ela é enviada automaticamente!";
+
+
+
+				// var html = "Bem vindo ao Hadassah Consulting! Segue abaixo as informações sobre sua conta."+
+				// "<br>Para fazer o Login, utilize este e-mail e esta senha:"+
+				// "<br>"+senha+
+				// "<br>Acesse via o site : http://hadassahconsulting-com.umbler.net/"+
+				// "<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+				// "<br><b>Por favor, não responda essa mensagem, pois ela é enviada automaticamente!</b>";
+
+				// var text = "Bem vindo ao Hadassah Consulting! Segue abaixo as informações sobre sua conta."+
+				// "<br>Para fazer o Login, utilize este e-mail e esta senha:"+
+				// "<br>"+senha+
+				// "<br>Acesse via o site : http://hadassahconsulting-com.umbler.net/"+
+				// "<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+				// "<br>Por favor, não responda essa mensagem, pois ela é enviada automaticamente!";
 
 
 				console.log('lllllllllllllllllll html lllllllllllllllllllllll');
